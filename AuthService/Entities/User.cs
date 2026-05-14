@@ -11,8 +11,7 @@ public class User
     public DateTime? UpdatedAt { get; set; }
 
     public VolunteerProfile? VolunteerProfile { get; set; }
-
+    public OrganizerVerification? OrganizerVerification { get; set; }
     public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
     public ICollection<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
-    public VolunteerProfile? VolunteerProfile { get; set; }
 }
