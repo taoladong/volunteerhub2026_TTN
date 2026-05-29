@@ -29,6 +29,3 @@ VolunteerHub là cổng sự kiện tình nguyện phục vụ môn Thực tập
 
 Mỗi thành viên làm trên nhánh riêng, push nhánh cá nhân và tạo Pull Request vào `master` sau khi đã kiểm tra phần việc.
 
-## Kế hoạch
-
-Repo này được dựng lại trong 2 tuần từ source hoàn thiện `D:\FW\FW\BaseCore`. Mỗi ngày copy phần việc tương ứng, kiểm tra build/test, commit, push GitHub, cập nhật Trello và upload Drive nếu có tài liệu.
