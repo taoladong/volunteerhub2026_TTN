@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 using EventService.Entities;
-using BaseCore.Repository.EFCore;
 using EventService.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;

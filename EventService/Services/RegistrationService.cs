@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using EventService.Entities;
 using EventService.Data;
 
-namespace BaseCore.Services.VolunteerHub
+namespace EventService.Services
 {
     public class RegistrationService : IRegistrationService
     {
@@ -302,7 +302,7 @@ namespace BaseCore.Services.VolunteerHub
                 throw new Exception("Check-in is outside the event attendance window");
         }
 
-        private static void ValidateCheckInProof(Entities.Event ev, string? qrCode, decimal? latitude, decimal? longitude)
+        private static void ValidateCheckInProof(Event ev, string? qrCode, decimal? latitude, decimal? longitude)
         {
             if (!string.IsNullOrWhiteSpace(ev.QrCode))
             {
@@ -352,7 +352,7 @@ namespace BaseCore.Services.VolunteerHub
             await _context.SaveChangesAsync();
         }
 
-        private static bool IsWithinEventRadius(Entities.Event ev, decimal? latitude, decimal? longitude)
+        private static bool IsWithinEventRadius(Event ev, decimal? latitude, decimal? longitude)
         {
             if (!latitude.HasValue || !longitude.HasValue || !ev.Latitude.HasValue || !ev.Longitude.HasValue)
                 return false;

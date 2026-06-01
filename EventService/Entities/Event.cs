@@ -35,8 +35,8 @@ namespace EventService.Entities
         public User Organizer { get; set; }
         public List<Registration> Registrations { get; set; }
         public List<WorkShift> WorkShifts { get; set; }
+        public List<Channel> Channels { get; set; }
         [NotMapped]
         public Channel Channel { get; set; }
-        public List<Channel> Channels { get; set; }
     }
 }

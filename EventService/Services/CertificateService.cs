@@ -1,15 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using EventService.Entities;
 using EventService.Data;
+using QRCoder;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
 using System.Runtime.Versioning;
 using System.Text;
-using QRCoder;
 
-namespace BaseCore.Services.VolunteerHub
+
+namespace EventService.Services
 {
     public class CertificateService : ICertificateService
     {

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using EventService.Entities;
 using EventService.Data;
-using BaseCore.Repository.EFCore;
 using EventService.Services;
 using System.Security.Claims;
 

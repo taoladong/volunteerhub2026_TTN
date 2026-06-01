@@ -3,7 +3,7 @@ using EventService.Entities;
 using EventService.Data;
 using System.Text.Json;
 
-namespace BaseCore.Services.VolunteerHub
+namespace EventService.Services
 {
     public class EventService : IEventService
     {
@@ -18,7 +18,7 @@ namespace BaseCore.Services.VolunteerHub
             _certificateService = certificateService;
         }
 
-        public async Task<(List<Entities.Event> Items, int TotalCount)> SearchAsync(
+        public async Task<(List<Event> Items, int TotalCount)> SearchAsync(
             string? keyword, int? categoryId, string? status,
             DateTime? startDateFrom, int page, int pageSize, int? skillId = null, string? location = null, bool publicOnly = true)
         {
@@ -89,7 +89,7 @@ namespace BaseCore.Services.VolunteerHub
             return (items, totalCount);
         }
 
-        public async Task<List<Entities.Event>> GetByOrganizerAsync(int organizerId)
+        public async Task<List<Event>> GetByOrganizerAsync(int organizerId)
         {
             return await _context.Events
                 .Include(e => e.Category)
@@ -99,7 +99,7 @@ namespace BaseCore.Services.VolunteerHub
                 .ToListAsync();
         }
 
-        public async Task<List<Entities.Event>> GetRecommendedAsync(int userId)
+        public async Task<List<Event>> GetRecommendedAsync(int userId)
         {
             var userSkillIds = await _context.VolunteerSkills
                 .Where(vs => vs.UserId == userId)
@@ -129,7 +129,7 @@ namespace BaseCore.Services.VolunteerHub
             return matched;
         }
 
-        public async Task<Entities.Event?> GetByIdAsync(int id)
+        public async Task<Event?> GetByIdAsync(int id)
         {
             var ev = await _context.Events
                 .Include(e => e.Category)
@@ -142,7 +142,7 @@ namespace BaseCore.Services.VolunteerHub
             return ev;
         }
 
-        public async Task<Entities.Event> CreateAsync(Entities.Event ev)
+        public async Task<Event> CreateAsync(Event ev)
         {
             ev.Status = "Pending";
             ev.CreatedAt = DateTime.UtcNow;
@@ -151,7 +151,7 @@ namespace BaseCore.Services.VolunteerHub
             return ev;
         }
 
-        public async Task UpdateAsync(Entities.Event ev)
+        public async Task UpdateAsync(Event ev)
         {
             _context.Events.Update(ev);
             await _context.SaveChangesAsync();
@@ -163,7 +163,7 @@ namespace BaseCore.Services.VolunteerHub
             if (ev != null) { _context.Events.Remove(ev); await _context.SaveChangesAsync(); }
         }
 
-        public async Task<Entities.Event> ApproveAsync(int eventId)
+        public async Task<Event> ApproveAsync(int eventId)
         {
             var ev = await _context.Events.FindAsync(eventId)
                 ?? throw new Exception("Event not found");
@@ -208,7 +208,7 @@ namespace BaseCore.Services.VolunteerHub
             return ev;
         }
 
-        public async Task<Entities.Event> RejectAsync(int eventId, string? reason)
+        public async Task<Event> RejectAsync(int eventId, string? reason)
         {
             var ev = await _context.Events.FindAsync(eventId)
                 ?? throw new Exception("Event not found");
@@ -228,7 +228,7 @@ namespace BaseCore.Services.VolunteerHub
             return ev;
         }
 
-        public async Task<Entities.Event> CompleteAsync(int eventId, int? organizerId = null)
+        public async Task<Event> CompleteAsync(int eventId, int? organizerId = null)
         {
             var ev = await _context.Events.FindAsync(eventId)
                 ?? throw new Exception("Event not found");
@@ -246,7 +246,7 @@ namespace BaseCore.Services.VolunteerHub
             return ev;
         }
 
-        public async Task<Entities.Event> ResubmitAsync(int eventId, int organizerId)
+        public async Task<Event> ResubmitAsync(int eventId, int organizerId)
         {
             var ev = await _context.Events.FindAsync(eventId)
                 ?? throw new Exception("Event not found");
@@ -258,7 +258,7 @@ namespace BaseCore.Services.VolunteerHub
             return ev;
         }
 
-        public async Task<Entities.Event> CancelAsync(int eventId, int? organizerId, string? reason)
+        public async Task<Event> CancelAsync(int eventId, int? organizerId, string? reason)
         {
             var ev = await _context.Events.FindAsync(eventId)
                 ?? throw new Exception("Event not found");
@@ -392,7 +392,7 @@ namespace BaseCore.Services.VolunteerHub
             }
         }
 
-        public async Task<Entities.Event> UncompleteAsync(int eventId)
+        public async Task<Event> UncompleteAsync(int eventId)
         {
             var ev = await _context.Events.FindAsync(eventId)
                 ?? throw new Exception("Event not found");

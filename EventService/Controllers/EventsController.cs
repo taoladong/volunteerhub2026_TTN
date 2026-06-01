@@ -216,7 +216,7 @@ namespace EventService.Controllers
             if (radiusError != null)
                 return BadRequest(new { message = radiusError });
 
-            var ev = new Entities.Event
+            var ev = new Event
             {
                 Title = dto.Title.Trim(), Description = dto.Description ?? "", Location = dto.Location ?? "",
                 Latitude = dto.Latitude, Longitude = dto.Longitude,
