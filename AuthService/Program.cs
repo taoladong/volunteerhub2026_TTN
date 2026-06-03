@@ -28,6 +28,7 @@ if (builder.Configuration.GetValue<bool>("Database:EnsureCreatedOnStartup"))
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 

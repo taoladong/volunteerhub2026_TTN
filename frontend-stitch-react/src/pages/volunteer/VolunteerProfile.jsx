@@ -82,6 +82,15 @@ const SKILL_STATUS = {
   },
 };
 
+const normalizeVerificationStatus = (status, verifiedFallback = false) => {
+  if (verifiedFallback) return 'Verified';
+  const normalized = String(status || '').trim();
+  if (normalized === 'Approved') return 'Verified';
+  if (normalized === 'Pending') return 'PendingVerification';
+  if (normalized === 'NotSubmitted') return 'Unverified';
+  return normalized || 'Unverified';
+};
+
 const normalizeProfileResponse = (data) => {
   if (data?.profile || data?.skills) {
     return {
@@ -382,7 +391,7 @@ export default function VolunteerProfile() {
 
   const displayProfile = profile || {};
   const displaySkills = profileSkills.length > 0 ? profileSkills : (Array.isArray(displayProfile.skills) ? displayProfile.skills : []);
-  const rawKycStatus = displayProfile.isKycVerified || displayProfile.kycStatus === 'Verified' ? 'Verified' : (displayProfile.kycStatus || 'Unverified');
+  const rawKycStatus = normalizeVerificationStatus(displayProfile.kycStatus, displayProfile.isKycVerified || displayProfile.kycStatus === 'Verified');
   const kycStatus = KYC_STATUS[rawKycStatus] || KYC_STATUS.Unverified;
   const canSubmitKyc = rawKycStatus !== 'PendingVerification';
 
@@ -569,7 +578,8 @@ export default function VolunteerProfile() {
         <div className="space-y-3">
           {displaySkills.length > 0 ? displaySkills.map((item, index) => {
             const id = skillIdOf(item);
-            const status = SKILL_STATUS[item?.verificationStatus] || SKILL_STATUS.SelfDeclared;
+            const skillStatusKey = normalizeVerificationStatus(item?.verificationStatus);
+            const status = SKILL_STATUS[skillStatusKey] || SKILL_STATUS.SelfDeclared;
             return (
               <div key={`${id || index}`} className="rounded-2xl border border-outline p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                 <div className="space-y-2">
@@ -592,7 +602,7 @@ export default function VolunteerProfile() {
 
                 <div className="flex flex-wrap gap-2">
                   <button type="button" className="btn-secondary" onClick={() => openSkillVerification(item)} disabled={skillSaving || !!uploadingField}>
-                    {item?.verificationStatus === 'PendingVerification' ? 'Cập nhật minh chứng' : 'Gửi admin xác minh'}
+                    {skillStatusKey === 'PendingVerification' ? 'Cập nhật minh chứng' : 'Gửi admin xác minh'}
                   </button>
                   {id ? (
                     <button type="button" className="btn-secondary text-error border-error/30" onClick={() => handleRemoveSkill(id)} disabled={skillSaving}>
