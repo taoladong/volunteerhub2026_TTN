@@ -9,7 +9,7 @@ using System.Runtime.Versioning;
 using System.Text;
 using QRCoder;
 
-namespace BaseCore.Services.VolunteerHub
+namespace EventService.Services
 {
     public class CertificateService : ICertificateService
     {

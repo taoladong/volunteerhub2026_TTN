@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using EventService.Entities;
 using EventService.Data;
 
-namespace BaseCore.Services.VolunteerHub
+namespace EventService.Services
 {
     public class RegistrationService : IRegistrationService
     {

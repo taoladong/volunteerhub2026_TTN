@@ -1,6 +1,6 @@
 using EventService.Entities;
 
-namespace BaseCore.Services.VolunteerHub
+namespace EventService.Services
 {
     public interface ICertificateService
     {

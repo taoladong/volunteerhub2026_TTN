@@ -3,7 +3,7 @@ using EventService.Entities;
 using EventService.Data;
 using System.Text.Json;
 
-namespace BaseCore.Services.VolunteerHub
+namespace EventService.Services
 {
     public class EventService : IEventService
     {
