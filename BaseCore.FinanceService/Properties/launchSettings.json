@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "BaseCore.FinanceService": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:5004"
+    }
+  }
+}
