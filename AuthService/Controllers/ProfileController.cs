@@ -34,6 +34,12 @@ public class ProfileController : ControllerBase
         return Ok(ToProfileResponse(profile));
     }
 
+    [HttpGet]
+    public Task<ActionResult<ProfileResponse>> GetCurrent(CancellationToken cancellationToken)
+    {
+        return GetMe(cancellationToken);
+    }
+
     [HttpPost]
     public async Task<ActionResult<ProfileResponse>> Create(ProfileUpsertRequest request, CancellationToken cancellationToken)
     {
@@ -72,6 +78,12 @@ public class ProfileController : ControllerBase
 
         var updatedProfile = await LoadProfileAsync(userId, cancellationToken);
         return Ok(ToProfileResponse(updatedProfile!));
+    }
+
+    [HttpPut]
+    public Task<ActionResult<ProfileResponse>> UpdateCurrent(ProfileUpsertRequest request, CancellationToken cancellationToken)
+    {
+        return UpdateMe(request, cancellationToken);
     }
 
     [HttpDelete("me")]
@@ -138,11 +150,41 @@ public class ProfileController : ControllerBase
         }
 
         volunteerSkill.YearsOfExperience = request.YearsOfExperience;
-        volunteerSkill.Note = NormalizeOptional(request.Note);
+        volunteerSkill.Note = NormalizeOptional(request.VerificationNote) ?? NormalizeOptional(request.Note);
+        if (!string.IsNullOrWhiteSpace(request.EvidenceUrl) || !string.IsNullOrWhiteSpace(request.VerificationNote))
+        {
+            volunteerSkill.VerificationStatus = VerificationStatus.Pending;
+        }
 
         await _dbContext.SaveChangesAsync(cancellationToken);
         volunteerSkill.Skill = skill;
 
+        return Ok(ToProfileSkillResponse(volunteerSkill));
+    }
+
+    [HttpPut("skills/{skillId:int}/verification")]
+    public async Task<ActionResult<ProfileSkillResponse>> SubmitSkillVerification(
+        int skillId,
+        ProfileSkillRequest request,
+        CancellationToken cancellationToken)
+    {
+        var userId = User.GetRequiredUserId();
+        var volunteerSkill = await _dbContext.VolunteerSkills
+            .Include(entity => entity.Skill)
+            .Include(entity => entity.VolunteerProfile)
+            .FirstOrDefaultAsync(
+                entity => entity.VolunteerProfile.UserId == userId && entity.SkillId == skillId,
+                cancellationToken);
+
+        if (volunteerSkill is null)
+        {
+            return NotFound(new { message = "Skill was not found on this profile." });
+        }
+
+        volunteerSkill.Note = NormalizeOptional(request.VerificationNote) ?? NormalizeOptional(request.Note) ?? volunteerSkill.Note;
+        volunteerSkill.VerificationStatus = VerificationStatus.Pending;
+
+        await _dbContext.SaveChangesAsync(cancellationToken);
         return Ok(ToProfileSkillResponse(volunteerSkill));
     }
 
@@ -170,28 +212,30 @@ public class ProfileController : ControllerBase
     [HttpPost("kyc")]
     public async Task<ActionResult<KycSubmissionResponse>> SubmitKyc(KycSubmitRequest request, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrWhiteSpace(request.LegalFullName) || string.IsNullOrWhiteSpace(request.IdentityNumber))
-        {
-            return BadRequest(new { message = "Legal full name and identity number are required." });
-        }
-
-        var profile = await GetOrCreateProfileAsync(User.GetRequiredUserId(), cancellationToken);
+        var userId = User.GetRequiredUserId();
+        var user = await _dbContext.Users.FirstOrDefaultAsync(entity => entity.Id == userId, cancellationToken);
+        var profile = await GetOrCreateProfileAsync(userId, cancellationToken);
         var hasPendingSubmission = await _dbContext.KycSubmissions.AnyAsync(
             submission => submission.VolunteerProfileId == profile.Id && submission.Status == VerificationStatus.Pending,
             cancellationToken);
 
-        if (hasPendingSubmission)
+        if (hasPendingSubmission && !request.ConfirmReverify)
         {
             return Conflict(new { message = "A pending KYC submission already exists." });
         }
 
+        var legalFullName = NormalizeOptional(request.LegalFullName) ?? user?.FullName ?? $"Volunteer #{userId}";
+        var identityNumber = NormalizeOptional(request.IdentityNumber) ?? $"KYC-{userId}-{DateTime.UtcNow:yyyyMMddHHmmss}";
+        var documentFrontUrl = NormalizeOptional(request.DocumentFrontUrl) ?? NormalizeOptional(request.IdentityFrontImageUrl);
+        var documentBackUrl = NormalizeOptional(request.DocumentBackUrl) ?? NormalizeOptional(request.IdentityBackImageUrl);
+
         var submission = new KycSubmission
         {
             VolunteerProfileId = profile.Id,
-            LegalFullName = request.LegalFullName.Trim(),
-            IdentityNumber = request.IdentityNumber.Trim(),
-            DocumentFrontUrl = NormalizeOptional(request.DocumentFrontUrl),
-            DocumentBackUrl = NormalizeOptional(request.DocumentBackUrl),
+            LegalFullName = legalFullName,
+            IdentityNumber = identityNumber,
+            DocumentFrontUrl = documentFrontUrl,
+            DocumentBackUrl = documentBackUrl,
             Status = VerificationStatus.Pending
         };
 
@@ -202,6 +246,34 @@ public class ProfileController : ControllerBase
         await _dbContext.SaveChangesAsync(cancellationToken);
 
         return Ok(ToKycSubmissionResponse(submission));
+    }
+
+    [HttpGet("passport")]
+    public async Task<IActionResult> GetPassport(CancellationToken cancellationToken)
+    {
+        var profile = await LoadProfileAsync(User.GetRequiredUserId(), cancellationToken);
+        if (profile is null)
+        {
+            return Ok(new
+            {
+                totalHours = 0,
+                totalEvents = 0,
+                totalCertificates = 0,
+                recentActivities = Array.Empty<object>()
+            });
+        }
+
+        return Ok(new
+        {
+            profile.UserId,
+            profileId = profile.Id,
+            totalHours = 0,
+            totalEvents = 0,
+            totalCertificates = 0,
+            verifiedSkills = profile.VolunteerSkills.Count(skill => skill.VerificationStatus == VerificationStatus.Approved),
+            kycStatus = profile.KycStatus,
+            recentActivities = Array.Empty<object>()
+        });
     }
 
     private async Task<VolunteerProfile> GetOrCreateProfileAsync(int userId, CancellationToken cancellationToken)
@@ -308,7 +380,10 @@ public class ProfileController : ControllerBase
             volunteerSkill.Skill.Description,
             volunteerSkill.YearsOfExperience,
             volunteerSkill.Note,
-            volunteerSkill.VerificationStatus);
+            volunteerSkill.VerificationStatus,
+            volunteerSkill.YearsOfExperience is null ? null : $"{volunteerSkill.YearsOfExperience} năm",
+            null,
+            volunteerSkill.Note);
     }
 
     private static KycSubmissionResponse ToKycSubmissionResponse(KycSubmission submission)
