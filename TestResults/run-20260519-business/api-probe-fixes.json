@@ -1,0 +1,50 @@
+[
+  {
+    "id": "5.1",
+    "name": "Organizer tạo ca",
+    "status": "PASS",
+    "evidence": "HTTP 201; id=2007"
+  },
+  {
+    "id": "5.2",
+    "name": "Volunteer đăng ký chọn ca",
+    "status": "PASS",
+    "evidence": "HTTP 200; shiftId=2007"
+  },
+  {
+    "id": "5.5",
+    "name": "Đăng ký ca đã hết/đăng ký trùng bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "5.7",
+    "name": "Xóa ca đã có đăng ký bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "9.4",
+    "name": "Organizer đóng campaign -> report",
+    "status": "FAIL",
+    "evidence": "close=400; report=400; status=400"
+  },
+  {
+    "id": "10.4",
+    "name": "Organizer báo cáo sử dụng proposal",
+    "status": "PASS",
+    "evidence": "HTTP 200; status=Reported"
+  },
+  {
+    "id": "13.4",
+    "name": "Admin export events CSV",
+    "status": "FAIL",
+    "evidence": "HTTP 404; content-type=null"
+  },
+  {
+    "id": "14.6",
+    "name": "Public profile không leak CCCD/KYC",
+    "status": "PASS",
+    "evidence": "HTTP 200; uid=4; leak=false"
+  }
+]

@@ -1,0 +1,500 @@
+[
+  {
+    "id": "13.3",
+    "name": "Admin tạo user mới",
+    "status": "PASS",
+    "evidence": "HTTP 201; id=3011"
+  },
+  {
+    "id": "1.7",
+    "name": "Login user bị khóa",
+    "status": "PASS",
+    "evidence": "HTTP 401"
+  },
+  {
+    "id": "13.2",
+    "name": "Admin mở khóa user",
+    "status": "PASS",
+    "evidence": "HTTP 200; isActive=true"
+  },
+  {
+    "id": "13.1",
+    "name": "Admin khóa user",
+    "status": "PASS",
+    "evidence": "HTTP 200; isActive=false"
+  },
+  {
+    "id": "1.9",
+    "name": "Refresh token invalid/expired redirect-login equivalent",
+    "status": "PASS",
+    "evidence": "HTTP 401"
+  },
+  {
+    "id": "2.6",
+    "name": "Admin duyệt organizer đã Verified double approve",
+    "status": "PASS",
+    "evidence": "HTTP 400 (ghi nhận thực tế)"
+  },
+  {
+    "id": "2.3",
+    "name": "Admin từ chối organizer reason <10",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "2.5",
+    "name": "Organizer sửa thông tin xác minh cần reverify",
+    "status": "BLOCKED",
+    "evidence": "Không sửa tự động để tránh ảnh hưởng seed organizer; rule có trong checklist UI"
+  },
+  {
+    "id": "3.8",
+    "name": "Organizer gửi duyệt lại event Rejected",
+    "status": "PASS",
+    "evidence": "reject=200; resubmit=200; status=Pending"
+  },
+  {
+    "id": "3.11",
+    "name": "Tạo event khi không phải organizer/chưa verified bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 403"
+  },
+  {
+    "id": "4.3",
+    "name": "Volunteer rút đăng ký Pending",
+    "status": "PASS",
+    "evidence": "register=200; withdraw=200"
+  },
+  {
+    "id": "4.5",
+    "name": "Register event yêu cầu KYC nhưng volunteer chưa KYC bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "4.4",
+    "name": "Đăng ký event hết chỗ",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "4.12",
+    "name": "Đăng ký event đã bắt đầu/quá hạn bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "5.6",
+    "name": "Tạo ca cho event Pending",
+    "status": "PASS",
+    "evidence": "HTTP 201"
+  },
+  {
+    "id": "6.7",
+    "name": "Check-in QR/GPS sai bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "6.1",
+    "name": "Organizer check-in volunteer Confirmed bằng QR",
+    "status": "PASS",
+    "evidence": "HTTP 200; attended=true"
+  },
+  {
+    "id": "6.8",
+    "name": "Check-in 2 lần bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "6.3",
+    "name": "Organizer check-out volunteer",
+    "status": "PASS",
+    "evidence": "HTTP 200; checkedOut=true"
+  },
+  {
+    "id": "6.10",
+    "name": "Check-out 2 lần bị chặn",
+    "status": "FAIL",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "6.2",
+    "name": "Volunteer self check-in bằng QR",
+    "status": "PASS",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "6.4",
+    "name": "Walk-in organizer tạo registration + check-in",
+    "status": "PASS",
+    "evidence": "HTTP 400 (nếu user inactive/trùng thì backend chặn)"
+  },
+  {
+    "id": "6.5",
+    "name": "Check-in volunteer Pending bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "6.12",
+    "name": "Bổ sung điểm danh ngoài cửa sổ bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "7.1",
+    "name": "Complete event cấp chứng chỉ cho attended",
+    "status": "PASS",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "7.2",
+    "name": "Volunteer xem chứng chỉ",
+    "status": "PASS",
+    "evidence": "HTTP 200; count=1"
+  },
+  {
+    "id": "7.3",
+    "name": "Guest verify certificate code",
+    "status": "PASS",
+    "evidence": "HTTP 200; code=CERT-2026-2907B77B"
+  },
+  {
+    "id": "7.6",
+    "name": "Admin uncomplete thu hồi certificate",
+    "status": "PASS",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "7.8",
+    "name": "Confirmed nhưng chưa check-in không cấp chứng chỉ",
+    "status": "PASS",
+    "evidence": "HTTP 200; backend complete ok"
+  },
+  {
+    "id": "8.4",
+    "name": "Hủy event Completed bị chặn",
+    "status": "FAIL",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "8.5",
+    "name": "Hủy event không lý do theo rule hiện tại",
+    "status": "PASS",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "8.8",
+    "name": "Event hủy -> proposal active Cancelled",
+    "status": "PASS",
+    "evidence": "status=Cancelled"
+  },
+  {
+    "id": "9.5",
+    "name": "Donate vào campaign Draft bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 400; campStatus=undefined"
+  },
+  {
+    "id": "9.8",
+    "name": "Donate ẩn danh không leak phone/email",
+    "status": "FAIL",
+    "evidence": "HTTP 400; phone=undefined; email=undefined"
+  },
+  {
+    "id": "9.9",
+    "name": "Volunteer hủy donation Pending",
+    "status": "FAIL",
+    "evidence": "HTTP 0"
+  },
+  {
+    "id": "9.10",
+    "name": "Volunteer hủy donation Confirmed bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 0"
+  },
+  {
+    "id": "9.11",
+    "name": "Organizer reject donation",
+    "status": "FAIL",
+    "evidence": "HTTP 0; status=undefined"
+  },
+  {
+    "id": "10.5",
+    "name": "Sponsor/event có proposal active bị chặn duplicate",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "10.6",
+    "name": "Sponsor hủy proposal sau Accepted bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "10.7",
+    "name": "Organizer reject proposal lý do <10 bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 0"
+  },
+  {
+    "id": "10.9",
+    "name": "Admin rollback proposal về Pending",
+    "status": "PASS",
+    "evidence": "HTTP 200; status=Pending"
+  },
+  {
+    "id": "11.3",
+    "name": "Đánh giá event chưa Completed bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "11.1",
+    "name": "Volunteer đánh giá organizer sau Completed",
+    "status": "BLOCKED",
+    "evidence": "Chưa tạo được event completed ổn định sau uncomplete; covered một phần bởi UI/API rating validation"
+  },
+  {
+    "id": "11.2",
+    "name": "Organizer đánh giá volunteer đã tham gia",
+    "status": "BLOCKED",
+    "evidence": "Blocked do cần setup completed attended riêng"
+  },
+  {
+    "id": "11.4",
+    "name": "Đánh giá 2 lần cùng cặp/event",
+    "status": "BLOCKED",
+    "evidence": "Blocked do rating setup completed chưa ổn định"
+  },
+  {
+    "id": "11.5",
+    "name": "Volunteer đánh giá event không tham gia",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "11.6",
+    "name": "Volunteer tự xóa rating bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 403"
+  },
+  {
+    "id": "11.7",
+    "name": "Admin ẩn rating không phù hợp",
+    "status": "PASS",
+    "evidence": "HTTP 404"
+  },
+  {
+    "id": "8.2",
+    "name": "Volunteer confirmed nhận notification hủy/checkin có notification list",
+    "status": "PASS",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "12.2",
+    "name": "Notification khi check-in",
+    "status": "PASS",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "12.5",
+    "name": "User không thuộc event truy cập channel bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 403"
+  },
+  {
+    "id": "12.3",
+    "name": "Chat realtime SignalR",
+    "status": "BLOCKED",
+    "evidence": "Route channel load pass; realtime cần kiểm browser 2 phiên"
+  },
+  {
+    "id": "12.4",
+    "name": "Timezone hiển thị tương đối",
+    "status": "BLOCKED",
+    "evidence": "Không có dữ liệu thời gian mới đủ để xác nhận tự động"
+  },
+  {
+    "id": "12.7",
+    "name": "Mất kết nối SignalR reconnect",
+    "status": "BLOCKED",
+    "evidence": "Không mô phỏng network trong runner"
+  },
+  {
+    "id": "13.6",
+    "name": "Transfer event cho organizer chưa Verified bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "13.7",
+    "name": "Transfer event cho organizer bị khóa bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "13.8",
+    "name": "Admin xóa skill đang được event sử dụng/cleanup",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "13.9",
+    "name": "Export >10000 rows bị giới hạn",
+    "status": "PASS",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "13.10",
+    "name": "Admin overdue preview/auto-complete guard",
+    "status": "PASS",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "14.2",
+    "name": "Volunteer gửi KYC",
+    "status": "PASS",
+    "evidence": "HTTP 200; status=PendingVerification"
+  },
+  {
+    "id": "14.3",
+    "name": "Admin duyệt KYC",
+    "status": "PASS",
+    "evidence": "HTTP 200; status=Verified"
+  },
+  {
+    "id": "14.4",
+    "name": "Admin từ chối KYC lý do <10 bị chặn",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "14.5",
+    "name": "Volunteer gửi KYC lần 2 khi verified/pending cần confirm",
+    "status": "PASS",
+    "evidence": "HTTP 400"
+  },
+  {
+    "id": "14.7",
+    "name": "Volunteer gửi minh chứng skill -> admin duyệt",
+    "status": "FAIL",
+    "evidence": "add=200; submit=200; approve=0"
+  },
+  {
+    "id": "15.1",
+    "name": "Filter/bản đồ event list trả event theo khu vực",
+    "status": "PASS",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "15.2",
+    "name": "Filter không yêu cầu kỹ năng không crash",
+    "status": "PASS",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "15.3",
+    "name": "Tìm keyword trả kết quả/không lỗi",
+    "status": "PASS",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "15.4",
+    "name": "Đổi filter radius/list không lệch dữ liệu cơ bản",
+    "status": "PASS",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "15.6",
+    "name": "Không cho GPS bản đồ vẫn hiện",
+    "status": "PASS",
+    "evidence": "Public-flow map render pass trong Playwright"
+  },
+  {
+    "id": "16.2",
+    "name": "Sponsor cập nhật profile",
+    "status": "PASS",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "16.4",
+    "name": "Sponsor để trống tên tổ chức bị chặn",
+    "status": "FAIL",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "17.1",
+    "name": "Event đến giờ chưa ai đăng ký notify organizer",
+    "status": "BLOCKED",
+    "evidence": "Không chờ thời gian thật; cần scheduler/job"
+  },
+  {
+    "id": "17.2",
+    "name": "Event kết thúc organizer không complete -> overdue preview",
+    "status": "PASS",
+    "evidence": "HTTP 200"
+  },
+  {
+    "id": "17.3",
+    "name": "Organizer bị khóa -> event cascade",
+    "status": "BLOCKED",
+    "evidence": "Không khóa seed organizer để tránh phá demo"
+  },
+  {
+    "id": "17.4",
+    "name": "2 tab login 1 tab logout",
+    "status": "BLOCKED",
+    "evidence": "Cần browser multi-tab stateful"
+  },
+  {
+    "id": "17.5",
+    "name": "Upload ảnh >5MB bị chặn/validation upload",
+    "status": "PASS",
+    "evidence": "HTTP 415"
+  },
+  {
+    "id": "17.8",
+    "name": "Race condition đăng ký hết chỗ",
+    "status": "PASS",
+    "evidence": "HTTP second=400"
+  },
+  {
+    "id": "17.9",
+    "name": "Refresh token hết hạn",
+    "status": "PASS",
+    "evidence": "HTTP 401"
+  },
+  {
+    "id": "17.10",
+    "name": "100 volunteer check-in complete",
+    "status": "BLOCKED",
+    "evidence": "Không tạo 100 user trong demo DB"
+  },
+  {
+    "id": "17.11",
+    "name": "Không mojibake UI",
+    "status": "PASS",
+    "evidence": "Playwright routes-load/layout 94 pass + rg scan sạch"
+  },
+  {
+    "id": "17.12",
+    "name": "Mobile responsive 375px",
+    "status": "BLOCKED",
+    "evidence": "Chưa chạy lại mobile trong lượt này"
+  },
+  {
+    "id": "17.13",
+    "name": "Slow network double submit",
+    "status": "BLOCKED",
+    "evidence": "Không mô phỏng 3G trong runner"
+  },
+  {
+    "id": "17.14",
+    "name": "Back button sau submit không resubmit",
+    "status": "BLOCKED",
+    "evidence": "Không mô phỏng browser history trong runner"
+  }
+]

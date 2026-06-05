@@ -1,0 +1,926 @@
+[
+  {
+    "id": "1.1",
+    "group": "1. Đăng k� & Đăng nhập (FR-01)",
+    "step": "Đăng k� t�i khoản mới (Volunteer)",
+    "expected": "Th�nh c�ng, redirect về login"
+  },
+  {
+    "id": "1.2",
+    "group": "1. Đăng k� & Đăng nhập (FR-01)",
+    "step": "Đăng nhập đ�ng username/password",
+    "expected": "V�o dashboard đ�ng role"
+  },
+  {
+    "id": "1.3",
+    "group": "1. Đăng k� & Đăng nhập (FR-01)",
+    "step": "Đăng nhập bằng email thay username",
+    "expected": "Cũng th�nh c�ng"
+  },
+  {
+    "id": "1.4",
+    "group": "1. Đăng k� & Đăng nhập (FR-01)",
+    "step": "Đăng k� tr�ng username",
+    "expected": "B�o lỗi \"username đ� tồn tại\""
+  },
+  {
+    "id": "1.5",
+    "group": "1. Đăng k� & Đăng nhập (FR-01)",
+    "step": "Đăng k� tr�ng email",
+    "expected": "B�o lỗi"
+  },
+  {
+    "id": "1.6",
+    "group": "1. Đăng k� & Đăng nhập (FR-01)",
+    "step": "Đăng nhập sai mật khẩu 8 lần li�n tiếp",
+    "expected": "Bị rate-limit 429 \"Too many requests\""
+  },
+  {
+    "id": "1.7",
+    "group": "1. Đăng k� & Đăng nhập (FR-01)",
+    "step": "Đăng nhập user bị kh�a (IsActive=false)",
+    "expected": "B�o lỗi 401, kh�ng v�o được"
+  },
+  {
+    "id": "1.8",
+    "group": "1. Đăng k� & Đăng nhập (FR-01)",
+    "step": "Truy cập /admin/users bằng t�i khoản volunteer",
+    "expected": "Bị redirect về dashboard (403)"
+  },
+  {
+    "id": "1.9",
+    "group": "1. Đăng k� & Đăng nhập (FR-01)",
+    "step": "Token hết hạn → gọi API",
+    "expected": "Tự refresh token hoặc redirect login"
+  },
+  {
+    "id": "1.10",
+    "group": "1. Đăng k� & Đăng nhập (FR-01)",
+    "step": "Sửa localStorage token th�nh gi� trị bậy → reload",
+    "expected": "Bị đẩy về login"
+  },
+  {
+    "id": "2.1",
+    "group": "2. X�c minh tổ chức (FR-06)",
+    "step": "Organizer v�o /organizer/verification, điền đầy đủ th�ng tin, gửi",
+    "expected": "Status chuyển Pending"
+  },
+  {
+    "id": "2.2",
+    "group": "2. X�c minh tổ chức (FR-06)",
+    "step": "Admin v�o /admin/organizer-verifications, duyệt",
+    "expected": "Status → Verified, organizer nhận th�ng b�o"
+  },
+  {
+    "id": "2.3",
+    "group": "2. X�c minh tổ chức (FR-06)",
+    "step": "Admin từ chối nhưng l� do < 10 k� tự",
+    "expected": "B�o lỗi validation"
+  },
+  {
+    "id": "2.4",
+    "group": "2. X�c minh tổ chức (FR-06)",
+    "step": "Organizer chưa verified → tạo event",
+    "expected": "Bị chặn, hiện th�ng b�o \"Cần x�c minh tổ chức\""
+  },
+  {
+    "id": "2.5",
+    "group": "2. X�c minh tổ chức (FR-06)",
+    "step": "Organizer đ� verified → sửa th�ng tin x�c minh",
+    "expected": "Status quay về Pending, kh�ng tạo event mới được"
+  },
+  {
+    "id": "2.6",
+    "group": "2. X�c minh tổ chức (FR-06)",
+    "step": "Admin duyệt organizer đ� Verified (double approve)",
+    "expected": "Kh�ng lỗi, giữ nguy�n"
+  },
+  {
+    "id": "3.1",
+    "group": "3. Tạo & Duyệt sự kiện (FR-07, FR-08)",
+    "step": "Organizer (verified) tạo event đầy đủ th�ng tin",
+    "expected": "Event status = Pending"
+  },
+  {
+    "id": "3.2",
+    "group": "3. Tạo & Duyệt sự kiện (FR-07, FR-08)",
+    "step": "Admin duyệt event",
+    "expected": "Status → Approved, QR code sinh, channel tạo"
+  },
+  {
+    "id": "3.3",
+    "group": "3. Tạo & Duyệt sự kiện (FR-07, FR-08)",
+    "step": "Organizer sửa event Approved (đổi thời gian)",
+    "expected": "Lưu th�nh c�ng, volunteer đ� confirm nhận th�ng b�o"
+  },
+  {
+    "id": "3.4",
+    "group": "3. Tạo & Duyệt sự kiện (FR-07, FR-08)",
+    "step": "Tạo event EndDate < StartDate",
+    "expected": "B�o lỗi validation"
+  },
+  {
+    "id": "3.5",
+    "group": "3. Tạo & Duyệt sự kiện (FR-07, FR-08)",
+    "step": "Tạo event MinParticipants > MaxParticipants",
+    "expected": "B�o lỗi"
+  },
+  {
+    "id": "3.6",
+    "group": "3. Tạo & Duyệt sự kiện (FR-07, FR-08)",
+    "step": "Tạo event StartDate trong qu� khứ",
+    "expected": "B�o lỗi hoặc cảnh b�o"
+  },
+  {
+    "id": "3.7",
+    "group": "3. Tạo & Duyệt sự kiện (FR-07, FR-08)",
+    "step": "Admin từ chối event, l� do < 10 k� tự",
+    "expected": "B�o lỗi"
+  },
+  {
+    "id": "3.8",
+    "group": "3. Tạo & Duyệt sự kiện (FR-07, FR-08)",
+    "step": "Organizer gửi duyệt lại event bị Rejected",
+    "expected": "Status → Pending"
+  },
+  {
+    "id": "3.9",
+    "group": "3. Tạo & Duyệt sự kiện (FR-07, FR-08)",
+    "step": "Volunteer cố approve event (sửa API call)",
+    "expected": "403 Forbidden"
+  },
+  {
+    "id": "3.10",
+    "group": "3. Tạo & Duyệt sự kiện (FR-07, FR-08)",
+    "step": "Sửa event đ� Cancelled",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "3.11",
+    "group": "3. Tạo & Duyệt sự kiện (FR-07, FR-08)",
+    "step": "Tạo event khi organizer chưa verified",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "4.1",
+    "group": "4. Đăng k� sự kiện (FR-10, FR-11, FR-12)",
+    "step": "Volunteer đăng k� event Approved",
+    "expected": "Registration status = Pending"
+  },
+  {
+    "id": "4.2",
+    "group": "4. Đăng k� sự kiện (FR-10, FR-11, FR-12)",
+    "step": "Organizer x�c nhận đăng k�",
+    "expected": "Status → Confirmed, volunteer nhận th�ng b�o"
+  },
+  {
+    "id": "4.3",
+    "group": "4. Đăng k� sự kiện (FR-10, FR-11, FR-12)",
+    "step": "Volunteer r�t đăng k� khi c�n Pending",
+    "expected": "Th�nh c�ng"
+  },
+  {
+    "id": "4.4",
+    "group": "4. Đăng k� sự kiện (FR-10, FR-11, FR-12)",
+    "step": "Đăng k� event đ� hết chỗ (MaxParticipants)",
+    "expected": "B�o lỗi \"Hết chỗ\""
+  },
+  {
+    "id": "4.5",
+    "group": "4. Đăng k� sự kiện (FR-10, FR-11, FR-12)",
+    "step": "Đăng k� event y�u cầu KYC nhưng volunteer chưa KYC",
+    "expected": "B�o lỗi \"Cần x�c minh danh t�nh\""
+  },
+  {
+    "id": "4.6",
+    "group": "4. Đăng k� sự kiện (FR-10, FR-11, FR-12)",
+    "step": "Đăng k� lại event đ� r�t trước đ�",
+    "expected": "Th�nh c�ng (tạo registration mới)"
+  },
+  {
+    "id": "4.7",
+    "group": "4. Đăng k� sự kiện (FR-10, FR-11, FR-12)",
+    "step": "Đăng k� 2 lần c�ng event",
+    "expected": "B�o lỗi \"Đ� đăng k�\""
+  },
+  {
+    "id": "4.8",
+    "group": "4. Đăng k� sự kiện (FR-10, FR-11, FR-12)",
+    "step": "R�t đăng k� khi đ� Confirmed",
+    "expected": "Kh�ng được r�t trực tiếp, phải gửi y�u cầu hủy"
+  },
+  {
+    "id": "4.9",
+    "group": "4. Đăng k� sự kiện (FR-10, FR-11, FR-12)",
+    "step": "Volunteer gửi y�u cầu hủy (đ� Confirmed)",
+    "expected": "Organizer nhận request, ph� duyệt → Cancelled"
+  },
+  {
+    "id": "4.10",
+    "group": "4. Đăng k� sự kiện (FR-10, FR-11, FR-12)",
+    "step": "Organizer hủy registration",
+    "expected": "Status → Cancelled, volunteer nhận th�ng b�o"
+  },
+  {
+    "id": "4.11",
+    "group": "4. Đăng k� sự kiện (FR-10, FR-11, FR-12)",
+    "step": "Đăng k� event Pending (chưa duyệt)",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "4.12",
+    "group": "4. Đăng k� sự kiện (FR-10, FR-11, FR-12)",
+    "step": "Đăng k� event đang diễn ra (StartDate đ� qua)",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "5.1",
+    "group": "5. Ca l�m việc (FR-13)",
+    "step": "Organizer tạo ca cho event",
+    "expected": "Th�nh c�ng, sub-channel tạo"
+  },
+  {
+    "id": "5.2",
+    "group": "5. Ca l�m việc (FR-13)",
+    "step": "Volunteer đăng k� chọn ca",
+    "expected": "Registration gắn shiftId"
+  },
+  {
+    "id": "5.3",
+    "group": "5. Ca l�m việc (FR-13)",
+    "step": "Tạo ca EndTime < StartTime",
+    "expected": "B�o lỗi"
+  },
+  {
+    "id": "5.4",
+    "group": "5. Ca l�m việc (FR-13)",
+    "step": "Tạo ca ngo�i khoảng thời gian event",
+    "expected": "B�o lỗi"
+  },
+  {
+    "id": "5.5",
+    "group": "5. Ca l�m việc (FR-13)",
+    "step": "Đăng k� ca đ� hết chỗ",
+    "expected": "B�o lỗi"
+  },
+  {
+    "id": "5.6",
+    "group": "5. Ca l�m việc (FR-13)",
+    "step": "Tạo ca cho event Pending (chưa approve)",
+    "expected": "Th�nh c�ng (parent channel tự tạo)"
+  },
+  {
+    "id": "5.7",
+    "group": "5. Ca l�m việc (FR-13)",
+    "step": "X�a ca đ� c� người đăng k�",
+    "expected": "Cần xử l�: chặn hoặc cảnh b�o"
+  },
+  {
+    "id": "6.1",
+    "group": "6. Điểm danh & Check-out (FR-14, FR-14b)",
+    "step": "Organizer qu�t QR volunteer đ� Confirmed",
+    "expected": "Check-in th�nh c�ng, volunteer nhận th�ng b�o"
+  },
+  {
+    "id": "6.2",
+    "group": "6. Điểm danh & Check-out (FR-14, FR-14b)",
+    "step": "Volunteer tự check-in bằng QR (self check-in)",
+    "expected": "Th�nh c�ng"
+  },
+  {
+    "id": "6.3",
+    "group": "6. Điểm danh & Check-out (FR-14, FR-14b)",
+    "step": "Organizer check-out volunteer",
+    "expected": "VolunteerHours tự t�nh, volunteer nhận th�ng b�o"
+  },
+  {
+    "id": "6.4",
+    "group": "6. Điểm danh & Check-out (FR-14, FR-14b)",
+    "step": "Walk-in: organizer đăng k� + check-in tại chỗ",
+    "expected": "Registration tạo + check-in lu�n"
+  },
+  {
+    "id": "6.5",
+    "group": "6. Điểm danh & Check-out (FR-14, FR-14b)",
+    "step": "Check-in volunteer chưa Confirmed (c�n Pending)",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "6.6",
+    "group": "6. Điểm danh & Check-out (FR-14, FR-14b)",
+    "step": "Check-in ngo�i cửa sổ thời gian (event chưa bắt đầu)",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "6.7",
+    "group": "6. Điểm danh & Check-out (FR-14, FR-14b)",
+    "step": "Check-in ngo�i b�n k�nh GPS (>CheckInRadiusKm)",
+    "expected": "Bị chặn (nếu d�ng GPS)"
+  },
+  {
+    "id": "6.8",
+    "group": "6. Điểm danh & Check-out (FR-14, FR-14b)",
+    "step": "Check-in 2 lần c�ng volunteer",
+    "expected": "Bị chặn \"Đ� điểm danh\""
+  },
+  {
+    "id": "6.9",
+    "group": "6. Điểm danh & Check-out (FR-14, FR-14b)",
+    "step": "Check-out volunteer chưa check-in",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "6.10",
+    "group": "6. Điểm danh & Check-out (FR-14, FR-14b)",
+    "step": "Check-out 2 lần",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "6.11",
+    "group": "6. Điểm danh & Check-out (FR-14, FR-14b)",
+    "step": "Organizer xoay QR code → volunteer d�ng QR cũ",
+    "expected": "Bị chặn \"QR kh�ng hợp lệ\""
+  },
+  {
+    "id": "6.12",
+    "group": "6. Điểm danh & Check-out (FR-14, FR-14b)",
+    "step": "Bổ sung điểm danh sau 7 ng�y",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "6.13",
+    "group": "6. Điểm danh & Check-out (FR-14, FR-14b)",
+    "step": "Organizer chỉnh VolunteerHours th�nh số �m",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "7.1",
+    "group": "7. Ho�n th�nh sự kiện & Chứng chỉ (FR-15, FR-16)",
+    "step": "Organizer đ�nh dấu Complete",
+    "expected": "Event → Completed, chứng chỉ tự cấp cho volunteer đ� check-in"
+  },
+  {
+    "id": "7.2",
+    "group": "7. Ho�n th�nh sự kiện & Chứng chỉ (FR-15, FR-16)",
+    "step": "Volunteer xem chứng chỉ ở /my-certificates",
+    "expected": "Hiển thị đ�ng, tải PDF được"
+  },
+  {
+    "id": "7.3",
+    "group": "7. Ho�n th�nh sự kiện & Chứng chỉ (FR-15, FR-16)",
+    "step": "Guest x�c thực chứng chỉ qua m� verify",
+    "expected": "Hiển thị th�ng tin hợp lệ"
+  },
+  {
+    "id": "7.4",
+    "group": "7. Ho�n th�nh sự kiện & Chứng chỉ (FR-15, FR-16)",
+    "step": "Complete event chưa c� ai check-in",
+    "expected": "Th�nh c�ng nhưng kh�ng cấp chứng chỉ n�o"
+  },
+  {
+    "id": "7.5",
+    "group": "7. Ho�n th�nh sự kiện & Chứng chỉ (FR-15, FR-16)",
+    "step": "Complete event chưa đủ MinParticipants",
+    "expected": "B�o lỗi hoặc cảnh b�o"
+  },
+  {
+    "id": "7.6",
+    "group": "7. Ho�n th�nh sự kiện & Chứng chỉ (FR-15, FR-16)",
+    "step": "Admin mở lại event (Uncomplete)",
+    "expected": "Status → Approved, chứng chỉ bị thu hồi"
+  },
+  {
+    "id": "7.7",
+    "group": "7. Ho�n th�nh sự kiện & Chứng chỉ (FR-15, FR-16)",
+    "step": "X�c thực chứng chỉ với m� sai",
+    "expected": "Hiển thị \"Kh�ng t�m thấy\""
+  },
+  {
+    "id": "7.8",
+    "group": "7. Ho�n th�nh sự kiện & Chứng chỉ (FR-15, FR-16)",
+    "step": "Volunteer chưa check-in nhưng đ� Confirmed → Complete",
+    "expected": "Kh�ng được cấp chứng chỉ"
+  },
+  {
+    "id": "8.1",
+    "group": "8. Hủy sự kiện & Cascade (FR-09)",
+    "step": "Organizer hủy event Approved (c� l� do)",
+    "expected": "Status → Cancelled"
+  },
+  {
+    "id": "8.2",
+    "group": "8. Hủy sự kiện & Cascade (FR-09)",
+    "step": "Volunteer đ� Confirmed nhận th�ng b�o hủy",
+    "expected": "C� notification"
+  },
+  {
+    "id": "8.3",
+    "group": "8. Hủy sự kiện & Cascade (FR-09)",
+    "step": "Campaign Open tự chuyển Closed",
+    "expected": "Kiểm tra campaign status"
+  },
+  {
+    "id": "8.4",
+    "group": "8. Hủy sự kiện & Cascade (FR-09)",
+    "step": "Hủy event đ� Completed",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "8.5",
+    "group": "8. Hủy sự kiện & Cascade (FR-09)",
+    "step": "Hủy event kh�ng c� l� do",
+    "expected": "Th�nh c�ng (l� do optional) hoặc bắt buộc t�y rule"
+  },
+  {
+    "id": "8.6",
+    "group": "8. Hủy sự kiện & Cascade (FR-09)",
+    "step": "Volunteer cố hủy event (kh�ng phải organizer)",
+    "expected": "403"
+  },
+  {
+    "id": "8.7",
+    "group": "8. Hủy sự kiện & Cascade (FR-09)",
+    "step": "Sau khi hủy, event biến mất khỏi trang public",
+    "expected": "Đ�ng, kh�ng hiện nữa"
+  },
+  {
+    "id": "8.8",
+    "group": "8. Hủy sự kiện & Cascade (FR-09)",
+    "step": "Sponsor c� proposal Accepted → event hủy",
+    "expected": "Proposal → Cancelled, sponsor nhận th�ng b�o"
+  },
+  {
+    "id": "9.1",
+    "group": "9. K�u gọi ủng hộ & Donation (FR-20)",
+    "step": "Organizer tạo campaign (Draft) → mở (Open)",
+    "expected": "Status chuyển đ�ng"
+  },
+  {
+    "id": "9.2",
+    "group": "9. K�u gọi ủng hộ & Donation (FR-20)",
+    "step": "Volunteer donate 50.000đ",
+    "expected": "Donation status = PendingConfirmation"
+  },
+  {
+    "id": "9.3",
+    "group": "9. K�u gọi ủng hộ & Donation (FR-20)",
+    "step": "Organizer x�c nhận donation",
+    "expected": "Status → Confirmed, tổng public cập nhật"
+  },
+  {
+    "id": "9.4",
+    "group": "9. K�u gọi ủng hộ & Donation (FR-20)",
+    "step": "Organizer đ�ng campaign → b�o c�o",
+    "expected": "Status → Closed → Reported"
+  },
+  {
+    "id": "9.5",
+    "group": "9. K�u gọi ủng hộ & Donation (FR-20)",
+    "step": "Donate v�o campaign Draft (chưa Open)",
+    "expected": "Bị chặn \"Campaign is not open\""
+  },
+  {
+    "id": "9.6",
+    "group": "9. K�u gọi ủng hộ & Donation (FR-20)",
+    "step": "Donate v�o campaign Closed",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "9.7",
+    "group": "9. K�u gọi ủng hộ & Donation (FR-20)",
+    "step": "Donate số tiền = 0 hoặc �m",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "9.8",
+    "group": "9. K�u gọi ủng hộ & Donation (FR-20)",
+    "step": "Donate ẩn danh → organizer xem list",
+    "expected": "Kh�ng thấy phone/email donor"
+  },
+  {
+    "id": "9.9",
+    "group": "9. K�u gọi ủng hộ & Donation (FR-20)",
+    "step": "Volunteer hủy donation khi c�n PendingConfirmation",
+    "expected": "Th�nh c�ng"
+  },
+  {
+    "id": "9.10",
+    "group": "9. K�u gọi ủng hộ & Donation (FR-20)",
+    "step": "Volunteer hủy donation đ� Confirmed",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "9.11",
+    "group": "9. K�u gọi ủng hộ & Donation (FR-20)",
+    "step": "Organizer từ chối donation",
+    "expected": "Status → Rejected, donor nhận th�ng b�o"
+  },
+  {
+    "id": "9.12",
+    "group": "9. K�u gọi ủng hộ & Donation (FR-20)",
+    "step": "Mở campaign từ Closed (đ� đ�ng)",
+    "expected": "Bị chặn (chỉ Draft→Open→Closed)"
+  },
+  {
+    "id": "9.13",
+    "group": "9. K�u gọi ủng hộ & Donation (FR-20)",
+    "step": "B�o c�o UsedAmount > ConfirmedAmount",
+    "expected": "Bị chặn hoặc y�u cầu giải tr�nh"
+  },
+  {
+    "id": "10.1",
+    "group": "10. T�i trợ doanh nghiệp (FR-21)",
+    "step": "Organizer mời sponsor (OrganizerRequest)",
+    "expected": "Proposal status = Pending"
+  },
+  {
+    "id": "10.2",
+    "group": "10. T�i trợ doanh nghiệp (FR-21)",
+    "step": "Sponsor chấp nhận",
+    "expected": "Status → Accepted"
+  },
+  {
+    "id": "10.3",
+    "group": "10. T�i trợ doanh nghiệp (FR-21)",
+    "step": "Organizer x�c nhận đ� nhận tiền (Received)",
+    "expected": "Nhập ActualReceivedAmount"
+  },
+  {
+    "id": "10.4",
+    "group": "10. T�i trợ doanh nghiệp (FR-21)",
+    "step": "Organizer b�o c�o sử dụng (Report)",
+    "expected": "Status → Reported"
+  },
+  {
+    "id": "10.5",
+    "group": "10. T�i trợ doanh nghiệp (FR-21)",
+    "step": "Sponsor đề nghị t�i trợ event đ� c� proposal active",
+    "expected": "Bị chặn \"Đ� c� đề nghị\""
+  },
+  {
+    "id": "10.6",
+    "group": "10. T�i trợ doanh nghiệp (FR-21)",
+    "step": "Sponsor hủy proposal sau khi Accepted",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "10.7",
+    "group": "10. T�i trợ doanh nghiệp (FR-21)",
+    "step": "Organizer reject proposal, l� do < 10 k� tự",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "10.8",
+    "group": "10. T�i trợ doanh nghiệp (FR-21)",
+    "step": "Event hủy → proposal Pending/Accepted tự Cancelled",
+    "expected": "Kiểm tra status"
+  },
+  {
+    "id": "10.9",
+    "group": "10. T�i trợ doanh nghiệp (FR-21)",
+    "step": "Admin rollback proposal về Pending",
+    "expected": "Th�nh c�ng"
+  },
+  {
+    "id": "10.10",
+    "group": "10. T�i trợ doanh nghiệp (FR-21)",
+    "step": "Sponsor offer v�o event Pending (chưa Approved)",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "11.1",
+    "group": "11. Đ�nh gi� hai chiều (FR-18)",
+    "step": "Volunteer đ�nh gi� organizer sau event Completed",
+    "expected": "Th�nh c�ng (1-5 sao + nhận x�t)"
+  },
+  {
+    "id": "11.2",
+    "group": "11. Đ�nh gi� hai chiều (FR-18)",
+    "step": "Organizer đ�nh gi� volunteer đ� tham gia",
+    "expected": "Th�nh c�ng"
+  },
+  {
+    "id": "11.3",
+    "group": "11. Đ�nh gi� hai chiều (FR-18)",
+    "step": "Đ�nh gi� event chưa Completed",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "11.4",
+    "group": "11. Đ�nh gi� hai chiều (FR-18)",
+    "step": "Đ�nh gi� 2 lần c�ng cặp/event",
+    "expected": "Bị chặn \"Đ� đ�nh gi�\""
+  },
+  {
+    "id": "11.5",
+    "group": "11. Đ�nh gi� hai chiều (FR-18)",
+    "step": "Volunteer đ�nh gi� organizer event m�nh kh�ng tham gia",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "11.6",
+    "group": "11. Đ�nh gi� hai chiều (FR-18)",
+    "step": "Volunteer tự x�a đ�nh gi�",
+    "expected": "Bị chặn (chỉ Admin x�a)"
+  },
+  {
+    "id": "11.7",
+    "group": "11. Đ�nh gi� hai chiều (FR-18)",
+    "step": "Admin ẩn đ�nh gi� kh�ng ph� hợp",
+    "expected": "Th�nh c�ng, kh�ng hiện public"
+  },
+  {
+    "id": "11.8",
+    "group": "11. Đ�nh gi� hai chiều (FR-18)",
+    "step": "Điểm ngo�i 1-5 (0 hoặc 6)",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "12.1",
+    "group": "12. Th�ng b�o & Realtime (FR-19, FR-24)",
+    "step": "Event được duyệt → organizer nhận th�ng b�o",
+    "expected": "C� notification mới"
+  },
+  {
+    "id": "12.2",
+    "group": "12. Th�ng b�o & Realtime (FR-19, FR-24)",
+    "step": "Volunteer được check-in → nhận th�ng b�o",
+    "expected": "C� notification"
+  },
+  {
+    "id": "12.3",
+    "group": "12. Th�ng b�o & Realtime (FR-19, FR-24)",
+    "step": "Chat trong channel event → tin nhắn hiện realtime",
+    "expected": "SignalR push"
+  },
+  {
+    "id": "12.4",
+    "group": "12. Th�ng b�o & Realtime (FR-19, FR-24)",
+    "step": "Thời gian hiển thị \"X ph�t trước\" đ�ng timezone",
+    "expected": "Kh�ng hiện \"7 giờ trước\" khi vừa gửi"
+  },
+  {
+    "id": "12.5",
+    "group": "12. Th�ng b�o & Realtime (FR-19, FR-24)",
+    "step": "Volunteer kh�ng thuộc event → truy cập channel",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "12.6",
+    "group": "12. Th�ng b�o & Realtime (FR-19, FR-24)",
+    "step": "Gửi tin nhắn rỗng",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "12.7",
+    "group": "12. Th�ng b�o & Realtime (FR-19, FR-24)",
+    "step": "Mất kết nối SignalR → reconnect",
+    "expected": "Tự reconnect, kh�ng mất tin"
+  },
+  {
+    "id": "13.1",
+    "group": "13. Admin quản trị (FR-23)",
+    "step": "Admin kh�a user",
+    "expected": "User bị 401 mọi API"
+  },
+  {
+    "id": "13.2",
+    "group": "13. Admin quản trị (FR-23)",
+    "step": "Admin mở kh�a user",
+    "expected": "User hoạt động b�nh thường"
+  },
+  {
+    "id": "13.3",
+    "group": "13. Admin quản trị (FR-23)",
+    "step": "Admin tạo user mới",
+    "expected": "Th�nh c�ng"
+  },
+  {
+    "id": "13.4",
+    "group": "13. Admin quản trị (FR-23)",
+    "step": "Admin export events CSV",
+    "expected": "Tải file CSV đ�ng"
+  },
+  {
+    "id": "13.5",
+    "group": "13. Admin quản trị (FR-23)",
+    "step": "Kh�a organizer c� event Approved",
+    "expected": "Event tự hủy, campaign/proposal cascade"
+  },
+  {
+    "id": "13.6",
+    "group": "13. Admin quản trị (FR-23)",
+    "step": "Admin transfer event cho organizer chưa Verified",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "13.7",
+    "group": "13. Admin quản trị (FR-23)",
+    "step": "Admin transfer event cho organizer bị kh�a",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "13.8",
+    "group": "13. Admin quản trị (FR-23)",
+    "step": "Admin x�a skill đang được event sử dụng",
+    "expected": "Skill bị x�a khỏi JSON event"
+  },
+  {
+    "id": "13.9",
+    "group": "13. Admin quản trị (FR-23)",
+    "step": "Export > 10.000 rows",
+    "expected": "Bị giới hạn maxRows"
+  },
+  {
+    "id": "13.10",
+    "group": "13. Admin quản trị (FR-23)",
+    "step": "Admin auto-complete event chưa qu� hạn 24h",
+    "expected": "Kh�ng complete"
+  },
+  {
+    "id": "14.1",
+    "group": "14. Hồ sơ & KYC (FR-03, FR-05)",
+    "step": "Volunteer cập nhật profile (kỹ năng, bio, avatar)",
+    "expected": "Lưu th�nh c�ng"
+  },
+  {
+    "id": "14.2",
+    "group": "14. Hồ sơ & KYC (FR-03, FR-05)",
+    "step": "Volunteer gửi KYC (ảnh CCCD + ch�n dung)",
+    "expected": "Status → PendingVerification"
+  },
+  {
+    "id": "14.3",
+    "group": "14. Hồ sơ & KYC (FR-03, FR-05)",
+    "step": "Admin duyệt KYC",
+    "expected": "Status → Verified, volunteer nhận th�ng b�o"
+  },
+  {
+    "id": "14.4",
+    "group": "14. Hồ sơ & KYC (FR-03, FR-05)",
+    "step": "Admin từ chối KYC, l� do < 10 k� tự",
+    "expected": "Bị chặn"
+  },
+  {
+    "id": "14.5",
+    "group": "14. Hồ sơ & KYC (FR-03, FR-05)",
+    "step": "Volunteer gửi KYC lần 2 khi đang Pending",
+    "expected": "Bị chặn hoặc ghi đ�"
+  },
+  {
+    "id": "14.6",
+    "group": "14. Hồ sơ & KYC (FR-03, FR-05)",
+    "step": "Xem profile người kh�c → kh�ng thấy ảnh CCCD",
+    "expected": "Đ�ng, KYC kh�ng leak"
+  },
+  {
+    "id": "14.7",
+    "group": "14. Hồ sơ & KYC (FR-03, FR-05)",
+    "step": "Volunteer gửi minh chứng kỹ năng → admin duyệt",
+    "expected": "Skill → Verified"
+  },
+  {
+    "id": "15.1",
+    "group": "15. Bản đồ & Filter (FR-02)",
+    "step": "Chọn b�n k�nh 5km → hiện event trong 5km",
+    "expected": "Số event tr�n bản đồ = số trong list"
+  },
+  {
+    "id": "15.2",
+    "group": "15. Bản đồ & Filter (FR-02)",
+    "step": "Chọn kỹ năng \"Kh�ng y�u cầu kỹ năng\"",
+    "expected": "Hiện event kh�ng y�u cầu skill"
+  },
+  {
+    "id": "15.3",
+    "group": "15. Bản đồ & Filter (FR-02)",
+    "step": "T�m kiếm keyword",
+    "expected": "Kết quả đ�ng"
+  },
+  {
+    "id": "15.4",
+    "group": "15. Bản đồ & Filter (FR-02)",
+    "step": "Chọn 10km rồi đổi 5km",
+    "expected": "Số marker tr�n bản đồ = số event trong list (kh�ng lệch)"
+  },
+  {
+    "id": "15.5",
+    "group": "15. Bản đồ & Filter (FR-02)",
+    "step": "T�m keyword kh�ng tồn tại",
+    "expected": "Hiện \"Kh�ng t�m thấy sự kiện\""
+  },
+  {
+    "id": "15.6",
+    "group": "15. Bản đồ & Filter (FR-02)",
+    "step": "Kh�ng cho ph�p GPS → bản đồ vẫn hiện",
+    "expected": "Hiện vị tr� mặc định, kh�ng crash"
+  },
+  {
+    "id": "16.1",
+    "group": "16. Sponsor Profile (FR-27)",
+    "step": "Sponsor v�o /sponsor/profile lần đầu",
+    "expected": "Profile tự tạo, form trống"
+  },
+  {
+    "id": "16.2",
+    "group": "16. Sponsor Profile (FR-27)",
+    "step": "Sponsor cập nhật th�ng tin",
+    "expected": "Lưu th�nh c�ng"
+  },
+  {
+    "id": "16.3",
+    "group": "16. Sponsor Profile (FR-27)",
+    "step": "Volunteer truy cập /sponsor/profile",
+    "expected": "Bị redirect (kh�ng phải Sponsor)"
+  },
+  {
+    "id": "16.4",
+    "group": "16. Sponsor Profile (FR-27)",
+    "step": "Sponsor để trống t�n tổ chức → lưu",
+    "expected": "Bị chặn validation"
+  },
+  {
+    "id": "17.1",
+    "group": "17. T�nh huống đặc biệt / Edge case tổng hợp",
+    "step": "Event đến giờ bắt đầu nhưng chưa c� ai đăng k�",
+    "expected": "Hệ thống gửi th�ng b�o cho organizer"
+  },
+  {
+    "id": "17.2",
+    "group": "17. T�nh huống đặc biệt / Edge case tổng hợp",
+    "step": "Event kết th�c nhưng organizer kh�ng Complete",
+    "expected": "Admin thấy trong overdue preview, auto-complete sau 24h"
+  },
+  {
+    "id": "17.3",
+    "group": "17. T�nh huống đặc biệt / Edge case tổng hợp",
+    "step": "Organizer tạo event → bị kh�a → event tự hủy",
+    "expected": "Cascade đ�ng"
+  },
+  {
+    "id": "17.4",
+    "group": "17. T�nh huống đặc biệt / Edge case tổng hợp",
+    "step": "2 tab c�ng login → 1 tab logout",
+    "expected": "Tab c�n lại bị đẩy về login khi gọi API"
+  },
+  {
+    "id": "17.5",
+    "group": "17. T�nh huống đặc biệt / Edge case tổng hợp",
+    "step": "Upload ảnh > 5MB",
+    "expected": "Bị chặn hoặc resize"
+  },
+  {
+    "id": "17.6",
+    "group": "17. T�nh huống đặc biệt / Edge case tổng hợp",
+    "step": "Nhập XSS `<script>alert(1)</script>` v�o t�n event",
+    "expected": "Hiển thị text thuần, kh�ng execute"
+  },
+  {
+    "id": "17.7",
+    "group": "17. T�nh huống đặc biệt / Edge case tổng hợp",
+    "step": "Nhập SQL injection v�o search",
+    "expected": "Kh�ng lỗi, trả kết quả rỗng"
+  },
+  {
+    "id": "17.8",
+    "group": "17. T�nh huống đặc biệt / Edge case tổng hợp",
+    "step": "Mở 2 browser, c�ng đăng k� event → 1 người cuối hết chỗ",
+    "expected": "Người sau nhận lỗi \"Hết chỗ\""
+  },
+  {
+    "id": "17.9",
+    "group": "17. T�nh huống đặc biệt / Edge case tổng hợp",
+    "step": "Refresh token hết hạn (sau 7 ng�y)",
+    "expected": "Bị đẩy về login"
+  },
+  {
+    "id": "17.10",
+    "group": "17. T�nh huống đặc biệt / Edge case tổng hợp",
+    "step": "Event c� 100 volunteer check-in → Complete",
+    "expected": "Chứng chỉ cấp đủ 100"
+  },
+  {
+    "id": "17.11",
+    "group": "17. T�nh huống đặc biệt / Edge case tổng hợp",
+    "step": "Trang hiển thị tiếng Việt đ�ng (kh�ng mojibake)",
+    "expected": "Tất cả trang kh�ng c� k� tự lạ"
+  },
+  {
+    "id": "17.12",
+    "group": "17. T�nh huống đặc biệt / Edge case tổng hợp",
+    "step": "Mobile responsive (viewport 375px)",
+    "expected": "Layout kh�ng vỡ"
+  },
+  {
+    "id": "17.13",
+    "group": "17. T�nh huống đặc biệt / Edge case tổng hợp",
+    "step": "Slow network (3G) → submit form",
+    "expected": "Kh�ng submit 2 lần (double-click protection)"
+  },
+  {
+    "id": "17.14",
+    "group": "17. T�nh huống đặc biệt / Edge case tổng hợp",
+    "step": "Back button sau khi submit form",
+    "expected": "Kh�ng re-submit"
+  }
+]

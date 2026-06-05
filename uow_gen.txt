@@ -1,0 +1,134 @@
+        IRepository<AccessToken> AccessTokens { get; }
+        IRepository<AuditLog> AuditLogs { get; }
+        IRepository<AuthRefreshToken> AuthRefreshTokens { get; }
+        IRepository<Badge> Badges { get; }
+        IRepository<Category> Categories { get; }
+        IRepository<Certificate> Certificates { get; }
+        IRepository<CertificateJob> CertificateJobs { get; }
+        IRepository<Channel> Channels { get; }
+        IRepository<Comment> Comments { get; }
+        IRepository<Event> Events { get; }
+        IRepository<EventCategory> EventCategories { get; }
+        IRepository<EventSponsor> EventSponsors { get; }
+        IRepository<Function> Functions { get; }
+        IRepository<GroupRoleAgency> GroupRoleAgencies { get; }
+        IRepository<IndividualDonation> IndividualDonations { get; }
+        IRepository<Like> Likes { get; }
+        IRepository<Mention> Mentions { get; }
+        IRepository<Module> Modules { get; }
+        IRepository<ModuleFunction> ModuleFunctions { get; }
+        IRepository<Notification> Notifications { get; }
+        IRepository<Order> Orders { get; }
+        IRepository<OrderDetail> OrderDetails { get; }
+        IRepository<OrganizerVerification> OrganizerVerifications { get; }
+        IRepository<Poll> Polls { get; }
+        IRepository<Post> Posts { get; }
+        IRepository<Product> Products { get; }
+        IRepository<Rating> Ratings { get; }
+        IRepository<Registration> Registrations { get; }
+        IRepository<Role> Roles { get; }
+        IRepository<RoleModuleFunction> RoleModuleFunctions { get; }
+        IRepository<SeedConfiguration> SeedConfigurations { get; }
+        IRepository<Setting> Settings { get; }
+        IRepository<Skill> Skills { get; }
+        IRepository<SponsorProfile> SponsorProfiles { get; }
+        IRepository<SponsorshipProposal> SponsorshipProposals { get; }
+        IRepository<SupportCampaign> SupportCampaigns { get; }
+        IRepository<User> Users { get; }
+        IRepository<UserBadge> UserBadges { get; }
+        IRepository<UserModule> UserModules { get; }
+        IRepository<UserRole> UserRoles { get; }
+        IRepository<VolunteerProfile> VolunteerProfiles { get; }
+        IRepository<VolunteerSkill> VolunteerSkills { get; }
+        IRepository<WorkShift> WorkShifts { get; }
+
+---
+        private IRepository<AccessToken>? _accessTokens;
+        private IRepository<AuditLog>? _auditLogs;
+        private IRepository<AuthRefreshToken>? _authRefreshTokens;
+        private IRepository<Badge>? _badges;
+        private IRepository<Category>? _categories;
+        private IRepository<Certificate>? _certificates;
+        private IRepository<CertificateJob>? _certificateJobs;
+        private IRepository<Channel>? _channels;
+        private IRepository<Comment>? _comments;
+        private IRepository<Event>? _events;
+        private IRepository<EventCategory>? _eventCategories;
+        private IRepository<EventSponsor>? _eventSponsors;
+        private IRepository<Function>? _functions;
+        private IRepository<GroupRoleAgency>? _groupRoleAgencies;
+        private IRepository<IndividualDonation>? _individualDonations;
+        private IRepository<Like>? _likes;
+        private IRepository<Mention>? _mentions;
+        private IRepository<Module>? _modules;
+        private IRepository<ModuleFunction>? _moduleFunctions;
+        private IRepository<Notification>? _notifications;
+        private IRepository<Order>? _orders;
+        private IRepository<OrderDetail>? _orderDetails;
+        private IRepository<OrganizerVerification>? _organizerVerifications;
+        private IRepository<Poll>? _polls;
+        private IRepository<Post>? _posts;
+        private IRepository<Product>? _products;
+        private IRepository<Rating>? _ratings;
+        private IRepository<Registration>? _registrations;
+        private IRepository<Role>? _roles;
+        private IRepository<RoleModuleFunction>? _roleModuleFunctions;
+        private IRepository<SeedConfiguration>? _seedConfigurations;
+        private IRepository<Setting>? _settings;
+        private IRepository<Skill>? _skills;
+        private IRepository<SponsorProfile>? _sponsorProfiles;
+        private IRepository<SponsorshipProposal>? _sponsorshipProposals;
+        private IRepository<SupportCampaign>? _supportCampaigns;
+        private IRepository<User>? _users;
+        private IRepository<UserBadge>? _userBadges;
+        private IRepository<UserModule>? _userModules;
+        private IRepository<UserRole>? _userRoles;
+        private IRepository<VolunteerProfile>? _volunteerProfiles;
+        private IRepository<VolunteerSkill>? _volunteerSkills;
+        private IRepository<WorkShift>? _workShifts;
+
+---
+        public IRepository<AccessToken> AccessTokens => _accessTokens ??= new Repository<AccessToken>(_context);
+        public IRepository<AuditLog> AuditLogs => _auditLogs ??= new Repository<AuditLog>(_context);
+        public IRepository<AuthRefreshToken> AuthRefreshTokens => _authRefreshTokens ??= new Repository<AuthRefreshToken>(_context);
+        public IRepository<Badge> Badges => _badges ??= new Repository<Badge>(_context);
+        public IRepository<Category> Categories => _categories ??= new Repository<Category>(_context);
+        public IRepository<Certificate> Certificates => _certificates ??= new Repository<Certificate>(_context);
+        public IRepository<CertificateJob> CertificateJobs => _certificateJobs ??= new Repository<CertificateJob>(_context);
+        public IRepository<Channel> Channels => _channels ??= new Repository<Channel>(_context);
+        public IRepository<Comment> Comments => _comments ??= new Repository<Comment>(_context);
+        public IRepository<Event> Events => _events ??= new Repository<Event>(_context);
+        public IRepository<EventCategory> EventCategories => _eventCategories ??= new Repository<EventCategory>(_context);
+        public IRepository<EventSponsor> EventSponsors => _eventSponsors ??= new Repository<EventSponsor>(_context);
+        public IRepository<Function> Functions => _functions ??= new Repository<Function>(_context);
+        public IRepository<GroupRoleAgency> GroupRoleAgencies => _groupRoleAgencies ??= new Repository<GroupRoleAgency>(_context);
+        public IRepository<IndividualDonation> IndividualDonations => _individualDonations ??= new Repository<IndividualDonation>(_context);
+        public IRepository<Like> Likes => _likes ??= new Repository<Like>(_context);
+        public IRepository<Mention> Mentions => _mentions ??= new Repository<Mention>(_context);
+        public IRepository<Module> Modules => _modules ??= new Repository<Module>(_context);
+        public IRepository<ModuleFunction> ModuleFunctions => _moduleFunctions ??= new Repository<ModuleFunction>(_context);
+        public IRepository<Notification> Notifications => _notifications ??= new Repository<Notification>(_context);
+        public IRepository<Order> Orders => _orders ??= new Repository<Order>(_context);
+        public IRepository<OrderDetail> OrderDetails => _orderDetails ??= new Repository<OrderDetail>(_context);
+        public IRepository<OrganizerVerification> OrganizerVerifications => _organizerVerifications ??= new Repository<OrganizerVerification>(_context);
+        public IRepository<Poll> Polls => _polls ??= new Repository<Poll>(_context);
+        public IRepository<Post> Posts => _posts ??= new Repository<Post>(_context);
+        public IRepository<Product> Products => _products ??= new Repository<Product>(_context);
+        public IRepository<Rating> Ratings => _ratings ??= new Repository<Rating>(_context);
+        public IRepository<Registration> Registrations => _registrations ??= new Repository<Registration>(_context);
+        public IRepository<Role> Roles => _roles ??= new Repository<Role>(_context);
+        public IRepository<RoleModuleFunction> RoleModuleFunctions => _roleModuleFunctions ??= new Repository<RoleModuleFunction>(_context);
+        public IRepository<SeedConfiguration> SeedConfigurations => _seedConfigurations ??= new Repository<SeedConfiguration>(_context);
+        public IRepository<Setting> Settings => _settings ??= new Repository<Setting>(_context);
+        public IRepository<Skill> Skills => _skills ??= new Repository<Skill>(_context);
+        public IRepository<SponsorProfile> SponsorProfiles => _sponsorProfiles ??= new Repository<SponsorProfile>(_context);
+        public IRepository<SponsorshipProposal> SponsorshipProposals => _sponsorshipProposals ??= new Repository<SponsorshipProposal>(_context);
+        public IRepository<SupportCampaign> SupportCampaigns => _supportCampaigns ??= new Repository<SupportCampaign>(_context);
+        public IRepository<User> Users => _users ??= new Repository<User>(_context);
+        public IRepository<UserBadge> UserBadges => _userBadges ??= new Repository<UserBadge>(_context);
+        public IRepository<UserModule> UserModules => _userModules ??= new Repository<UserModule>(_context);
+        public IRepository<UserRole> UserRoles => _userRoles ??= new Repository<UserRole>(_context);
+        public IRepository<VolunteerProfile> VolunteerProfiles => _volunteerProfiles ??= new Repository<VolunteerProfile>(_context);
+        public IRepository<VolunteerSkill> VolunteerSkills => _volunteerSkills ??= new Repository<VolunteerSkill>(_context);
+        public IRepository<WorkShift> WorkShifts => _workShifts ??= new Repository<WorkShift>(_context);
+

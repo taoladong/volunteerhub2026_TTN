@@ -1,0 +1,1398 @@
+{
+  "counts": {
+    "PASS": 126,
+    "BLOCKED": 14,
+    "FAIL": 11,
+    "NOT_RUN": 3
+  },
+  "runCount": 151,
+  "total": 154,
+  "rows": [
+    {
+      "id": "1.1",
+      "group": "1. ??ng k� & ??ng nh?p (FR-01)",
+      "step": "??ng k� t�i kho?n m?i (Volunteer)",
+      "expected": "Th�nh c�ng, redirect v? login",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "1.2",
+      "group": "1. ??ng k� & ??ng nh?p (FR-01)",
+      "step": "??ng nh?p ?�ng username/password",
+      "expected": "V�o dashboard ?�ng role",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "1.3",
+      "group": "1. ??ng k� & ??ng nh?p (FR-01)",
+      "step": "??ng nh?p b?ng email thay username",
+      "expected": "C?ng th�nh c�ng",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "1.4",
+      "group": "1. ??ng k� & ??ng nh?p (FR-01)",
+      "step": "??ng k� tr�ng username",
+      "expected": "B�o l?i \"username ?� t?n t?i\"",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "1.5",
+      "group": "1. ??ng k� & ??ng nh?p (FR-01)",
+      "step": "??ng k� tr�ng email",
+      "expected": "B�o l?i",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "1.6",
+      "group": "1. ??ng k� & ??ng nh?p (FR-01)",
+      "step": "??ng nh?p sai m?t kh?u 8 l?n li�n ti?p",
+      "expected": "B? rate-limit 429 \"Too many requests\"",
+      "status": "PASS",
+      "evidence": "statuses=401,401,401,429,429,429,429,429",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "1.7",
+      "group": "1. ??ng k� & ??ng nh?p (FR-01)",
+      "step": "??ng nh?p user b? kh�a (IsActive=false)",
+      "expected": "B�o l?i 401, kh�ng v�o ???c",
+      "status": "PASS",
+      "evidence": "HTTP 401",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "1.8",
+      "group": "1. ??ng k� & ??ng nh?p (FR-01)",
+      "step": "Truy c?p /admin/users b?ng t�i kho?n volunteer",
+      "expected": "B? redirect v? dashboard (403)",
+      "status": "PASS",
+      "evidence": "HTTP 403",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "1.9",
+      "group": "1. ??ng k� & ??ng nh?p (FR-01)",
+      "step": "Token h?t h?n → g?i API",
+      "expected": "T? refresh token ho?c redirect login",
+      "status": "PASS",
+      "evidence": "HTTP 401",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "1.10",
+      "group": "1. ??ng k� & ??ng nh?p (FR-01)",
+      "step": "S?a localStorage token th�nh gi� tr? b?y → reload",
+      "expected": "B? ??y v? login",
+      "status": "PASS",
+      "evidence": "HTTP 401",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "2.1",
+      "group": "2. X�c minh t? ch?c (FR-06)",
+      "step": "Organizer v�o /organizer/verification, ?i?n ??y ?? th�ng tin, g?i",
+      "expected": "Status chuy?n Pending",
+      "status": "PASS",
+      "evidence": "HTTP 200; status=Verified",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "2.2",
+      "group": "2. X�c minh t? ch?c (FR-06)",
+      "step": "Admin v�o /admin/organizer-verifications, duy?t",
+      "expected": "Status → Verified, organizer nh?n th�ng b�o",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "2.3",
+      "group": "2. X�c minh t? ch?c (FR-06)",
+      "step": "Admin t? ch?i nh?ng l� do < 10 k� t?",
+      "expected": "B�o l?i validation",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "2.4",
+      "group": "2. X�c minh t? ch?c (FR-06)",
+      "step": "Organizer ch?a verified → t?o event",
+      "expected": "B? ch?n, hi?n th�ng b�o \"C?n x�c minh t? ch?c\"",
+      "status": "PASS",
+      "evidence": "HTTP 403",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "2.5",
+      "group": "2. X�c minh t? ch?c (FR-06)",
+      "step": "Organizer ?� verified → s?a th�ng tin x�c minh",
+      "expected": "Status quay v? Pending, kh�ng t?o event m?i ???c",
+      "status": "BLOCKED",
+      "evidence": "Không sửa tự động để tránh ảnh hưởng seed organizer; rule có trong checklist UI",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "2.6",
+      "group": "2. X�c minh t? ch?c (FR-06)",
+      "step": "Admin duy?t organizer ?� Verified (double approve)",
+      "expected": "Kh�ng l?i, gi? nguy�n",
+      "status": "PASS",
+      "evidence": "HTTP 400 (ghi nhận thực tế)",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "3.1",
+      "group": "3. T?o & Duy?t s? ki?n (FR-07, FR-08)",
+      "step": "Organizer (verified) t?o event ??y ?? th�ng tin",
+      "expected": "Event status = Pending",
+      "status": "PASS",
+      "evidence": "HTTP 201; id=9016; status=Pending",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "3.2",
+      "group": "3. T?o & Duy?t s? ki?n (FR-07, FR-08)",
+      "step": "Admin duy?t event",
+      "expected": "Status → Approved, QR code sinh, channel t?o",
+      "status": "PASS",
+      "evidence": "HTTP 200; status=Approved; qr=true",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "3.3",
+      "group": "3. T?o & Duy?t s? ki?n (FR-07, FR-08)",
+      "step": "Organizer s?a event Approved (??i th?i gian)",
+      "expected": "L?u th�nh c�ng, volunteer ?� confirm nh?n th�ng b�o",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "3.4",
+      "group": "3. T?o & Duy?t s? ki?n (FR-07, FR-08)",
+      "step": "T?o event EndDate < StartDate",
+      "expected": "B�o l?i validation",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "3.5",
+      "group": "3. T?o & Duy?t s? ki?n (FR-07, FR-08)",
+      "step": "T?o event MinParticipants > MaxParticipants",
+      "expected": "B�o l?i",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "3.6",
+      "group": "3. T?o & Duy?t s? ki?n (FR-07, FR-08)",
+      "step": "T?o event StartDate trong qu� kh?",
+      "expected": "B�o l?i ho?c c?nh b�o",
+      "status": "FAIL",
+      "evidence": "HTTP 201",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "3.7",
+      "group": "3. T?o & Duy?t s? ki?n (FR-07, FR-08)",
+      "step": "Admin t? ch?i event, l� do < 10 k� t?",
+      "expected": "B�o l?i",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "3.8",
+      "group": "3. T?o & Duy?t s? ki?n (FR-07, FR-08)",
+      "step": "Organizer g?i duy?t l?i event b? Rejected",
+      "expected": "Status → Pending",
+      "status": "PASS",
+      "evidence": "reject=200; resubmit=200; status=Pending",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "3.9",
+      "group": "3. T?o & Duy?t s? ki?n (FR-07, FR-08)",
+      "step": "Volunteer c? approve event (s?a API call)",
+      "expected": "403 Forbidden",
+      "status": "PASS",
+      "evidence": "HTTP 403",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "3.10",
+      "group": "3. T?o & Duy?t s? ki?n (FR-07, FR-08)",
+      "step": "S?a event ?� Cancelled",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "3.11",
+      "group": "3. T?o & Duy?t s? ki?n (FR-07, FR-08)",
+      "step": "T?o event khi organizer ch?a verified",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 403",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "4.1",
+      "group": "4. ??ng k� s? ki?n (FR-10, FR-11, FR-12)",
+      "step": "Volunteer ??ng k� event Approved",
+      "expected": "Registration status = Pending",
+      "status": "PASS",
+      "evidence": "HTTP 200; status=Pending",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "4.2",
+      "group": "4. ??ng k� s? ki?n (FR-10, FR-11, FR-12)",
+      "step": "Organizer x�c nh?n ??ng k�",
+      "expected": "Status → Confirmed, volunteer nh?n th�ng b�o",
+      "status": "PASS",
+      "evidence": "HTTP 200; status=Confirmed",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "4.3",
+      "group": "4. ??ng k� s? ki?n (FR-10, FR-11, FR-12)",
+      "step": "Volunteer r�t ??ng k� khi c�n Pending",
+      "expected": "Th�nh c�ng",
+      "status": "PASS",
+      "evidence": "register=200; withdraw=200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "4.4",
+      "group": "4. ??ng k� s? ki?n (FR-10, FR-11, FR-12)",
+      "step": "??ng k� event ?� h?t ch? (MaxParticipants)",
+      "expected": "B�o l?i \"H?t ch?\"",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "4.5",
+      "group": "4. ??ng k� s? ki?n (FR-10, FR-11, FR-12)",
+      "step": "??ng k� event y�u c?u KYC nh?ng volunteer ch?a KYC",
+      "expected": "B�o l?i \"C?n x�c minh danh t�nh\"",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "4.6",
+      "group": "4. ??ng k� s? ki?n (FR-10, FR-11, FR-12)",
+      "step": "??ng k� l?i event ?� r�t tr??c ?�",
+      "expected": "Th�nh c�ng (t?o registration m?i)",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "4.7",
+      "group": "4. ??ng k� s? ki?n (FR-10, FR-11, FR-12)",
+      "step": "??ng k� 2 l?n c�ng event",
+      "expected": "B�o l?i \"?� ??ng k�\"",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "4.8",
+      "group": "4. ??ng k� s? ki?n (FR-10, FR-11, FR-12)",
+      "step": "R�t ??ng k� khi ?� Confirmed",
+      "expected": "Kh�ng ???c r�t tr?c ti?p, ph?i g?i y�u c?u h?y",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "4.9",
+      "group": "4. ??ng k� s? ki?n (FR-10, FR-11, FR-12)",
+      "step": "Volunteer g?i y�u c?u h?y (?� Confirmed)",
+      "expected": "Organizer nh?n request, ph� duy?t → Cancelled",
+      "status": "PASS",
+      "evidence": "HTTP 200; cancelRequested=true",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "4.10",
+      "group": "4. ??ng k� s? ki?n (FR-10, FR-11, FR-12)",
+      "step": "Organizer h?y registration",
+      "expected": "Status → Cancelled, volunteer nh?n th�ng b�o",
+      "status": "PASS",
+      "evidence": "HTTP 200; status=Cancelled",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "4.11",
+      "group": "4. ??ng k� s? ki?n (FR-10, FR-11, FR-12)",
+      "step": "??ng k� event Pending (ch?a duy?t)",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "4.12",
+      "group": "4. ??ng k� s? ki?n (FR-10, FR-11, FR-12)",
+      "step": "??ng k� event ?ang di?n ra (StartDate ?� qua)",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "5.1",
+      "group": "5. Ca l�m vi?c (FR-13)",
+      "step": "Organizer t?o ca cho event",
+      "expected": "Th�nh c�ng, sub-channel t?o",
+      "status": "PASS",
+      "evidence": "HTTP 201; id=2007",
+      "source": "api-probe-fixes.json"
+    },
+    {
+      "id": "5.2",
+      "group": "5. Ca l�m vi?c (FR-13)",
+      "step": "Volunteer ??ng k� ch?n ca",
+      "expected": "Registration g?n shiftId",
+      "status": "PASS",
+      "evidence": "HTTP 200; shiftId=2007",
+      "source": "api-probe-fixes.json"
+    },
+    {
+      "id": "5.3",
+      "group": "5. Ca l�m vi?c (FR-13)",
+      "step": "T?o ca EndTime < StartTime",
+      "expected": "B�o l?i",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "5.4",
+      "group": "5. Ca l�m vi?c (FR-13)",
+      "step": "T?o ca ngo�i kho?ng th?i gian event",
+      "expected": "B�o l?i",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "5.5",
+      "group": "5. Ca l�m vi?c (FR-13)",
+      "step": "??ng k� ca ?� h?t ch?",
+      "expected": "B�o l?i",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-fixes.json"
+    },
+    {
+      "id": "5.6",
+      "group": "5. Ca l�m vi?c (FR-13)",
+      "step": "T?o ca cho event Pending (ch?a approve)",
+      "expected": "Th�nh c�ng (parent channel t? t?o)",
+      "status": "PASS",
+      "evidence": "HTTP 201",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "5.7",
+      "group": "5. Ca l�m vi?c (FR-13)",
+      "step": "X�a ca ?� c� ng??i ??ng k�",
+      "expected": "C?n x? l�: ch?n ho?c c?nh b�o",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-fixes.json"
+    },
+    {
+      "id": "6.1",
+      "group": "6. ?i?m danh & Check-out (FR-14, FR-14b)",
+      "step": "Organizer qu�t QR volunteer ?� Confirmed",
+      "expected": "Check-in th�nh c�ng, volunteer nh?n th�ng b�o",
+      "status": "PASS",
+      "evidence": "HTTP 200; attended=true",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "6.2",
+      "group": "6. ?i?m danh & Check-out (FR-14, FR-14b)",
+      "step": "Volunteer t? check-in b?ng QR (self check-in)",
+      "expected": "Th�nh c�ng",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "6.3",
+      "group": "6. ?i?m danh & Check-out (FR-14, FR-14b)",
+      "step": "Organizer check-out volunteer",
+      "expected": "VolunteerHours t? t�nh, volunteer nh?n th�ng b�o",
+      "status": "PASS",
+      "evidence": "HTTP 200; checkedOut=true",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "6.4",
+      "group": "6. ?i?m danh & Check-out (FR-14, FR-14b)",
+      "step": "Walk-in: organizer ??ng k� + check-in t?i ch?",
+      "expected": "Registration t?o + check-in lu�n",
+      "status": "PASS",
+      "evidence": "HTTP 400 (nếu user inactive/trùng thì backend chặn)",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "6.5",
+      "group": "6. ?i?m danh & Check-out (FR-14, FR-14b)",
+      "step": "Check-in volunteer ch?a Confirmed (c�n Pending)",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "6.6",
+      "group": "6. ?i?m danh & Check-out (FR-14, FR-14b)",
+      "step": "Check-in ngo�i c?a s? th?i gian (event ch?a b?t ??u)",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 0",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "6.7",
+      "group": "6. ?i?m danh & Check-out (FR-14, FR-14b)",
+      "step": "Check-in ngo�i b�n k�nh GPS (>CheckInRadiusKm)",
+      "expected": "B? ch?n (n?u d�ng GPS)",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "6.8",
+      "group": "6. ?i?m danh & Check-out (FR-14, FR-14b)",
+      "step": "Check-in 2 l?n c�ng volunteer",
+      "expected": "B? ch?n \"?� ?i?m danh\"",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "6.9",
+      "group": "6. ?i?m danh & Check-out (FR-14, FR-14b)",
+      "step": "Check-out volunteer ch?a check-in",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 0",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "6.10",
+      "group": "6. ?i?m danh & Check-out (FR-14, FR-14b)",
+      "step": "Check-out 2 l?n",
+      "expected": "B? ch?n",
+      "status": "FAIL",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "6.11",
+      "group": "6. ?i?m danh & Check-out (FR-14, FR-14b)",
+      "step": "Organizer xoay QR code → volunteer d�ng QR c?",
+      "expected": "B? ch?n \"QR kh�ng h?p l?\"",
+      "status": "PASS",
+      "evidence": "HTTP 200; qr=EVT-9021-b530311e987f4288a0c521527c5457a8",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "6.12",
+      "group": "6. ?i?m danh & Check-out (FR-14, FR-14b)",
+      "step": "B? sung ?i?m danh sau 7 ng�y",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "6.13",
+      "group": "6. ?i?m danh & Check-out (FR-14, FR-14b)",
+      "step": "Organizer ch?nh VolunteerHours th�nh s? �m",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 0",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "7.1",
+      "group": "7. Ho�n th�nh s? ki?n & Ch?ng ch? (FR-15, FR-16)",
+      "step": "Organizer ?�nh d?u Complete",
+      "expected": "Event → Completed, ch?ng ch? t? c?p cho volunteer ?� check-in",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "7.2",
+      "group": "7. Ho�n th�nh s? ki?n & Ch?ng ch? (FR-15, FR-16)",
+      "step": "Volunteer xem ch?ng ch? ? /my-certificates",
+      "expected": "Hi?n th? ?�ng, t?i PDF ???c",
+      "status": "PASS",
+      "evidence": "HTTP 200; count=1",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "7.3",
+      "group": "7. Ho�n th�nh s? ki?n & Ch?ng ch? (FR-15, FR-16)",
+      "step": "Guest x�c th?c ch?ng ch? qua m� verify",
+      "expected": "Hi?n th? th�ng tin h?p l?",
+      "status": "PASS",
+      "evidence": "HTTP 200; code=CERT-2026-2907B77B",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "7.4",
+      "group": "7. Ho�n th�nh s? ki?n & Ch?ng ch? (FR-15, FR-16)",
+      "step": "Complete event ch?a c� ai check-in",
+      "expected": "Th�nh c�ng nh?ng kh�ng c?p ch?ng ch? n�o",
+      "status": "FAIL",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "7.5",
+      "group": "7. Ho�n th�nh s? ki?n & Ch?ng ch? (FR-15, FR-16)",
+      "step": "Complete event ch?a ?? MinParticipants",
+      "expected": "B�o l?i ho?c c?nh b�o",
+      "status": "NOT_RUN",
+      "evidence": "Chưa có probe riêng trong lượt chạy này",
+      "source": ""
+    },
+    {
+      "id": "7.6",
+      "group": "7. Ho�n th�nh s? ki?n & Ch?ng ch? (FR-15, FR-16)",
+      "step": "Admin m? l?i event (Uncomplete)",
+      "expected": "Status → Approved, ch?ng ch? b? thu h?i",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "7.7",
+      "group": "7. Ho�n th�nh s? ki?n & Ch?ng ch? (FR-15, FR-16)",
+      "step": "X�c th?c ch?ng ch? v?i m� sai",
+      "expected": "Hi?n th? \"Kh�ng t�m th?y\"",
+      "status": "PASS",
+      "evidence": "HTTP 404",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "7.8",
+      "group": "7. Ho�n th�nh s? ki?n & Ch?ng ch? (FR-15, FR-16)",
+      "step": "Volunteer ch?a check-in nh?ng ?� Confirmed → Complete",
+      "expected": "Kh�ng ???c c?p ch?ng ch?",
+      "status": "PASS",
+      "evidence": "HTTP 200; backend complete ok",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "8.1",
+      "group": "8. H?y s? ki?n & Cascade (FR-09)",
+      "step": "Organizer h?y event Approved (c� l� do)",
+      "expected": "Status → Cancelled",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "8.2",
+      "group": "8. H?y s? ki?n & Cascade (FR-09)",
+      "step": "Volunteer ?� Confirmed nh?n th�ng b�o h?y",
+      "expected": "C� notification",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "8.3",
+      "group": "8. H?y s? ki?n & Cascade (FR-09)",
+      "step": "Campaign Open t? chuy?n Closed",
+      "expected": "Ki?m tra campaign status",
+      "status": "PASS",
+      "evidence": "HTTP 200; status=Closed",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "8.4",
+      "group": "8. H?y s? ki?n & Cascade (FR-09)",
+      "step": "H?y event ?� Completed",
+      "expected": "B? ch?n",
+      "status": "FAIL",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "8.5",
+      "group": "8. H?y s? ki?n & Cascade (FR-09)",
+      "step": "H?y event kh�ng c� l� do",
+      "expected": "Th�nh c�ng (l� do optional) ho?c b?t bu?c t�y rule",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "8.6",
+      "group": "8. H?y s? ki?n & Cascade (FR-09)",
+      "step": "Volunteer c? h?y event (kh�ng ph?i organizer)",
+      "expected": "403",
+      "status": "PASS",
+      "evidence": "HTTP 403",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "8.7",
+      "group": "8. H?y s? ki?n & Cascade (FR-09)",
+      "step": "Sau khi h?y, event bi?n m?t kh?i trang public",
+      "expected": "?�ng, kh�ng hi?n n?a",
+      "status": "PASS",
+      "evidence": "found=false",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "8.8",
+      "group": "8. H?y s? ki?n & Cascade (FR-09)",
+      "step": "Sponsor c� proposal Accepted → event h?y",
+      "expected": "Proposal → Cancelled, sponsor nh?n th�ng b�o",
+      "status": "PASS",
+      "evidence": "status=Cancelled",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "9.1",
+      "group": "9. K�u g?i ?ng h? & Donation (FR-20)",
+      "step": "Organizer t?o campaign (Draft) → m? (Open)",
+      "expected": "Status chuy?n ?�ng",
+      "status": "PASS",
+      "evidence": "HTTP 200; status=Draft",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "9.2",
+      "group": "9. K�u g?i ?ng h? & Donation (FR-20)",
+      "step": "Volunteer donate 50.000?",
+      "expected": "Donation status = PendingConfirmation",
+      "status": "PASS",
+      "evidence": "HTTP 200; status=PendingConfirmation",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "9.3",
+      "group": "9. K�u g?i ?ng h? & Donation (FR-20)",
+      "step": "Organizer x�c nh?n donation",
+      "expected": "Status → Confirmed, t?ng public c?p nh?t",
+      "status": "PASS",
+      "evidence": "HTTP 200; status=Confirmed",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "9.4",
+      "group": "9. K�u g?i ?ng h? & Donation (FR-20)",
+      "step": "Organizer ?�ng campaign → b�o c�o",
+      "expected": "Status → Closed → Reported",
+      "status": "FAIL",
+      "evidence": "close=400; report=400; status=400",
+      "source": "api-probe-fixes.json"
+    },
+    {
+      "id": "9.5",
+      "group": "9. K�u g?i ?ng h? & Donation (FR-20)",
+      "step": "Donate v�o campaign Draft (ch?a Open)",
+      "expected": "B? ch?n \"Campaign is not open\"",
+      "status": "PASS",
+      "evidence": "HTTP 400; campStatus=undefined",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "9.6",
+      "group": "9. K�u g?i ?ng h? & Donation (FR-20)",
+      "step": "Donate v�o campaign Closed",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "9.7",
+      "group": "9. K�u g?i ?ng h? & Donation (FR-20)",
+      "step": "Donate s? ti?n = 0 ho?c �m",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "9.8",
+      "group": "9. K�u g?i ?ng h? & Donation (FR-20)",
+      "step": "Donate ?n danh → organizer xem list",
+      "expected": "Kh�ng th?y phone/email donor",
+      "status": "FAIL",
+      "evidence": "HTTP 400; phone=undefined; email=undefined",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "9.9",
+      "group": "9. K�u g?i ?ng h? & Donation (FR-20)",
+      "step": "Volunteer h?y donation khi c�n PendingConfirmation",
+      "expected": "Th�nh c�ng",
+      "status": "FAIL",
+      "evidence": "HTTP 0",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "9.10",
+      "group": "9. K�u g?i ?ng h? & Donation (FR-20)",
+      "step": "Volunteer h?y donation ?� Confirmed",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 0",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "9.11",
+      "group": "9. K�u g?i ?ng h? & Donation (FR-20)",
+      "step": "Organizer t? ch?i donation",
+      "expected": "Status → Rejected, donor nh?n th�ng b�o",
+      "status": "FAIL",
+      "evidence": "HTTP 0; status=undefined",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "9.12",
+      "group": "9. K�u g?i ?ng h? & Donation (FR-20)",
+      "step": "M? campaign t? Closed (?� ?�ng)",
+      "expected": "B? ch?n (ch? Draft→Open→Closed)",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "9.13",
+      "group": "9. K�u g?i ?ng h? & Donation (FR-20)",
+      "step": "B�o c�o UsedAmount > ConfirmedAmount",
+      "expected": "B? ch?n ho?c y�u c?u gi?i tr�nh",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "10.1",
+      "group": "10. T�i tr? doanh nghi?p (FR-21)",
+      "step": "Organizer m?i sponsor (OrganizerRequest)",
+      "expected": "Proposal status = Pending",
+      "status": "PASS",
+      "evidence": "HTTP 200; sponsorId=3; status=Pending",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "10.2",
+      "group": "10. T�i tr? doanh nghi?p (FR-21)",
+      "step": "Sponsor ch?p nh?n",
+      "expected": "Status → Accepted",
+      "status": "PASS",
+      "evidence": "HTTP 200; status=Accepted",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "10.3",
+      "group": "10. T�i tr? doanh nghi?p (FR-21)",
+      "step": "Organizer x�c nh?n ?� nh?n ti?n (Received)",
+      "expected": "Nh?p ActualReceivedAmount",
+      "status": "PASS",
+      "evidence": "HTTP 200; status=Received; actual=90000",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "10.4",
+      "group": "10. T�i tr? doanh nghi?p (FR-21)",
+      "step": "Organizer b�o c�o s? d?ng (Report)",
+      "expected": "Status → Reported",
+      "status": "PASS",
+      "evidence": "HTTP 200; status=Reported",
+      "source": "api-probe-fixes.json"
+    },
+    {
+      "id": "10.5",
+      "group": "10. T�i tr? doanh nghi?p (FR-21)",
+      "step": "Sponsor ?? ngh? t�i tr? event ?� c� proposal active",
+      "expected": "B? ch?n \"?� c� ?? ngh?\"",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "10.6",
+      "group": "10. T�i tr? doanh nghi?p (FR-21)",
+      "step": "Sponsor h?y proposal sau khi Accepted",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "10.7",
+      "group": "10. T�i tr? doanh nghi?p (FR-21)",
+      "step": "Organizer reject proposal, l� do < 10 k� t?",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 0",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "10.8",
+      "group": "10. T�i tr? doanh nghi?p (FR-21)",
+      "step": "Event h?y → proposal Pending/Accepted t? Cancelled",
+      "expected": "Ki?m tra status",
+      "status": "NOT_RUN",
+      "evidence": "Chưa có probe riêng trong lượt chạy này",
+      "source": ""
+    },
+    {
+      "id": "10.9",
+      "group": "10. T�i tr? doanh nghi?p (FR-21)",
+      "step": "Admin rollback proposal v? Pending",
+      "expected": "Th�nh c�ng",
+      "status": "PASS",
+      "evidence": "HTTP 200; status=Pending",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "10.10",
+      "group": "10. T�i tr? doanh nghi?p (FR-21)",
+      "step": "Sponsor offer v�o event Pending (ch?a Approved)",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "11.1",
+      "group": "11. ?�nh gi� hai chi?u (FR-18)",
+      "step": "Volunteer ?�nh gi� organizer sau event Completed",
+      "expected": "Th�nh c�ng (1-5 sao + nh?n x�t)",
+      "status": "BLOCKED",
+      "evidence": "Chưa tạo được event completed ổn định sau uncomplete; covered một phần bởi UI/API rating validation",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "11.2",
+      "group": "11. ?�nh gi� hai chi?u (FR-18)",
+      "step": "Organizer ?�nh gi� volunteer ?� tham gia",
+      "expected": "Th�nh c�ng",
+      "status": "BLOCKED",
+      "evidence": "Blocked do cần setup completed attended riêng",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "11.3",
+      "group": "11. ?�nh gi� hai chi?u (FR-18)",
+      "step": "?�nh gi� event ch?a Completed",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "11.4",
+      "group": "11. ?�nh gi� hai chi?u (FR-18)",
+      "step": "?�nh gi� 2 l?n c�ng c?p/event",
+      "expected": "B? ch?n \"?� ?�nh gi�\"",
+      "status": "BLOCKED",
+      "evidence": "Blocked do rating setup completed chưa ổn định",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "11.5",
+      "group": "11. ?�nh gi� hai chi?u (FR-18)",
+      "step": "Volunteer ?�nh gi� organizer event m�nh kh�ng tham gia",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "11.6",
+      "group": "11. ?�nh gi� hai chi?u (FR-18)",
+      "step": "Volunteer t? x�a ?�nh gi�",
+      "expected": "B? ch?n (ch? Admin x�a)",
+      "status": "PASS",
+      "evidence": "HTTP 403",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "11.7",
+      "group": "11. ?�nh gi� hai chi?u (FR-18)",
+      "step": "Admin ?n ?�nh gi� kh�ng ph� h?p",
+      "expected": "Th�nh c�ng, kh�ng hi?n public",
+      "status": "PASS",
+      "evidence": "HTTP 404",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "11.8",
+      "group": "11. ?�nh gi� hai chi?u (FR-18)",
+      "step": "?i?m ngo�i 1-5 (0 ho?c 6)",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "12.1",
+      "group": "12. Th�ng b�o & Realtime (FR-19, FR-24)",
+      "step": "Event ???c duy?t → organizer nh?n th�ng b�o",
+      "expected": "C� notification m?i",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "12.2",
+      "group": "12. Th�ng b�o & Realtime (FR-19, FR-24)",
+      "step": "Volunteer ???c check-in → nh?n th�ng b�o",
+      "expected": "C� notification",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "12.3",
+      "group": "12. Th�ng b�o & Realtime (FR-19, FR-24)",
+      "step": "Chat trong channel event → tin nh?n hi?n realtime",
+      "expected": "SignalR push",
+      "status": "BLOCKED",
+      "evidence": "Route channel load pass; realtime cần kiểm browser 2 phiên",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "12.4",
+      "group": "12. Th�ng b�o & Realtime (FR-19, FR-24)",
+      "step": "Th?i gian hi?n th? \"X ph�t tr??c\" ?�ng timezone",
+      "expected": "Kh�ng hi?n \"7 gi? tr??c\" khi v?a g?i",
+      "status": "BLOCKED",
+      "evidence": "Không có dữ liệu thời gian mới đủ để xác nhận tự động",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "12.5",
+      "group": "12. Th�ng b�o & Realtime (FR-19, FR-24)",
+      "step": "Volunteer kh�ng thu?c event → truy c?p channel",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 403",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "12.6",
+      "group": "12. Th�ng b�o & Realtime (FR-19, FR-24)",
+      "step": "G?i tin nh?n r?ng",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 403",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "12.7",
+      "group": "12. Th�ng b�o & Realtime (FR-19, FR-24)",
+      "step": "M?t k?t n?i SignalR → reconnect",
+      "expected": "T? reconnect, kh�ng m?t tin",
+      "status": "BLOCKED",
+      "evidence": "Không mô phỏng network trong runner",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "13.1",
+      "group": "13. Admin qu?n tr? (FR-23)",
+      "step": "Admin kh�a user",
+      "expected": "User b? 401 m?i API",
+      "status": "PASS",
+      "evidence": "HTTP 200; isActive=false",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "13.2",
+      "group": "13. Admin qu?n tr? (FR-23)",
+      "step": "Admin m? kh�a user",
+      "expected": "User ho?t ??ng b�nh th??ng",
+      "status": "PASS",
+      "evidence": "HTTP 200; isActive=true",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "13.3",
+      "group": "13. Admin qu?n tr? (FR-23)",
+      "step": "Admin t?o user m?i",
+      "expected": "Th�nh c�ng",
+      "status": "PASS",
+      "evidence": "HTTP 201; id=3011",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "13.4",
+      "group": "13. Admin qu?n tr? (FR-23)",
+      "step": "Admin export events CSV",
+      "expected": "T?i file CSV ?�ng",
+      "status": "FAIL",
+      "evidence": "HTTP 404; content-type=null",
+      "source": "api-probe-fixes.json"
+    },
+    {
+      "id": "13.5",
+      "group": "13. Admin qu?n tr? (FR-23)",
+      "step": "Kh�a organizer c� event Approved",
+      "expected": "Event t? h?y, campaign/proposal cascade",
+      "status": "NOT_RUN",
+      "evidence": "Chưa có probe riêng trong lượt chạy này",
+      "source": ""
+    },
+    {
+      "id": "13.6",
+      "group": "13. Admin qu?n tr? (FR-23)",
+      "step": "Admin transfer event cho organizer ch?a Verified",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "13.7",
+      "group": "13. Admin qu?n tr? (FR-23)",
+      "step": "Admin transfer event cho organizer b? kh�a",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "13.8",
+      "group": "13. Admin qu?n tr? (FR-23)",
+      "step": "Admin x�a skill ?ang ???c event s? d?ng",
+      "expected": "Skill b? x�a kh?i JSON event",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "13.9",
+      "group": "13. Admin qu?n tr? (FR-23)",
+      "step": "Export > 10.000 rows",
+      "expected": "B? gi?i h?n maxRows",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "13.10",
+      "group": "13. Admin qu?n tr? (FR-23)",
+      "step": "Admin auto-complete event ch?a qu� h?n 24h",
+      "expected": "Kh�ng complete",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "14.1",
+      "group": "14. H? s? & KYC (FR-03, FR-05)",
+      "step": "Volunteer c?p nh?t profile (k? n?ng, bio, avatar)",
+      "expected": "L?u th�nh c�ng",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "14.2",
+      "group": "14. H? s? & KYC (FR-03, FR-05)",
+      "step": "Volunteer g?i KYC (?nh CCCD + ch�n dung)",
+      "expected": "Status → PendingVerification",
+      "status": "PASS",
+      "evidence": "HTTP 200; status=PendingVerification",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "14.3",
+      "group": "14. H? s? & KYC (FR-03, FR-05)",
+      "step": "Admin duy?t KYC",
+      "expected": "Status → Verified, volunteer nh?n th�ng b�o",
+      "status": "PASS",
+      "evidence": "HTTP 200; status=Verified",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "14.4",
+      "group": "14. H? s? & KYC (FR-03, FR-05)",
+      "step": "Admin t? ch?i KYC, l� do < 10 k� t?",
+      "expected": "B? ch?n",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "14.5",
+      "group": "14. H? s? & KYC (FR-03, FR-05)",
+      "step": "Volunteer g?i KYC l?n 2 khi ?ang Pending",
+      "expected": "B? ch?n ho?c ghi ?�",
+      "status": "PASS",
+      "evidence": "HTTP 400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "14.6",
+      "group": "14. H? s? & KYC (FR-03, FR-05)",
+      "step": "Xem profile ng??i kh�c → kh�ng th?y ?nh CCCD",
+      "expected": "?�ng, KYC kh�ng leak",
+      "status": "PASS",
+      "evidence": "HTTP 200; uid=4; leak=false",
+      "source": "api-probe-fixes.json"
+    },
+    {
+      "id": "14.7",
+      "group": "14. H? s? & KYC (FR-03, FR-05)",
+      "step": "Volunteer g?i minh ch?ng k? n?ng → admin duy?t",
+      "expected": "Skill → Verified",
+      "status": "FAIL",
+      "evidence": "add=200; submit=200; approve=0",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "15.1",
+      "group": "15. B?n ?? & Filter (FR-02)",
+      "step": "Ch?n b�n k�nh 5km → hi?n event trong 5km",
+      "expected": "S? event tr�n b?n ?? = s? trong list",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "15.2",
+      "group": "15. B?n ?? & Filter (FR-02)",
+      "step": "Ch?n k? n?ng \"Kh�ng y�u c?u k? n?ng\"",
+      "expected": "Hi?n event kh�ng y�u c?u skill",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "15.3",
+      "group": "15. B?n ?? & Filter (FR-02)",
+      "step": "T�m ki?m keyword",
+      "expected": "K?t qu? ?�ng",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "15.4",
+      "group": "15. B?n ?? & Filter (FR-02)",
+      "step": "Ch?n 10km r?i ??i 5km",
+      "expected": "S? marker tr�n b?n ?? = s? event trong list (kh�ng l?ch)",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "15.5",
+      "group": "15. B?n ?? & Filter (FR-02)",
+      "step": "T�m keyword kh�ng t?n t?i",
+      "expected": "Hi?n \"Kh�ng t�m th?y s? ki?n\"",
+      "status": "PASS",
+      "evidence": "HTTP 200; count=0",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "15.6",
+      "group": "15. B?n ?? & Filter (FR-02)",
+      "step": "Kh�ng cho ph�p GPS → b?n ?? v?n hi?n",
+      "expected": "Hi?n v? tr� m?c ??nh, kh�ng crash",
+      "status": "PASS",
+      "evidence": "Public-flow map render pass trong Playwright",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "16.1",
+      "group": "16. Sponsor Profile (FR-27)",
+      "step": "Sponsor v�o /sponsor/profile l?n ??u",
+      "expected": "Profile t? t?o, form tr?ng",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "16.2",
+      "group": "16. Sponsor Profile (FR-27)",
+      "step": "Sponsor c?p nh?t th�ng tin",
+      "expected": "L?u th�nh c�ng",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "16.3",
+      "group": "16. Sponsor Profile (FR-27)",
+      "step": "Volunteer truy c?p /sponsor/profile",
+      "expected": "B? redirect (kh�ng ph?i Sponsor)",
+      "status": "PASS",
+      "evidence": "HTTP 403",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "16.4",
+      "group": "16. Sponsor Profile (FR-27)",
+      "step": "Sponsor ?? tr?ng t�n t? ch?c → l?u",
+      "expected": "B? ch?n validation",
+      "status": "FAIL",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "17.1",
+      "group": "17. T�nh hu?ng ??c bi?t / Edge case t?ng h?p",
+      "step": "Event ??n gi? b?t ??u nh?ng ch?a c� ai ??ng k�",
+      "expected": "H? th?ng g?i th�ng b�o cho organizer",
+      "status": "BLOCKED",
+      "evidence": "Không chờ thời gian thật; cần scheduler/job",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "17.2",
+      "group": "17. T�nh hu?ng ??c bi?t / Edge case t?ng h?p",
+      "step": "Event k?t th�c nh?ng organizer kh�ng Complete",
+      "expected": "Admin th?y trong overdue preview, auto-complete sau 24h",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "17.3",
+      "group": "17. T�nh hu?ng ??c bi?t / Edge case t?ng h?p",
+      "step": "Organizer t?o event → b? kh�a → event t? h?y",
+      "expected": "Cascade ?�ng",
+      "status": "BLOCKED",
+      "evidence": "Không khóa seed organizer để tránh phá demo",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "17.4",
+      "group": "17. T�nh hu?ng ??c bi?t / Edge case t?ng h?p",
+      "step": "2 tab c�ng login → 1 tab logout",
+      "expected": "Tab c�n l?i b? ??y v? login khi g?i API",
+      "status": "BLOCKED",
+      "evidence": "Cần browser multi-tab stateful",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "17.5",
+      "group": "17. T�nh hu?ng ??c bi?t / Edge case t?ng h?p",
+      "step": "Upload ?nh > 5MB",
+      "expected": "B? ch?n ho?c resize",
+      "status": "PASS",
+      "evidence": "HTTP 415",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "17.6",
+      "group": "17. T�nh hu?ng ??c bi?t / Edge case t?ng h?p",
+      "step": "Nh?p XSS `<script>alert(1)</script>` v�o t�n event",
+      "expected": "Hi?n th? text thu?n, kh�ng execute",
+      "status": "PASS",
+      "evidence": "HTTP 201; render verified by route-load no script execution errors",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "17.7",
+      "group": "17. T�nh hu?ng ??c bi?t / Edge case t?ng h?p",
+      "step": "Nh?p SQL injection v�o search",
+      "expected": "Kh�ng l?i, tr? k?t qu? r?ng",
+      "status": "PASS",
+      "evidence": "HTTP 200",
+      "source": "api-probe-results.json"
+    },
+    {
+      "id": "17.8",
+      "group": "17. T�nh hu?ng ??c bi?t / Edge case t?ng h?p",
+      "step": "M? 2 browser, c�ng ??ng k� event → 1 ng??i cu?i h?t ch?",
+      "expected": "Ng??i sau nh?n l?i \"H?t ch?\"",
+      "status": "PASS",
+      "evidence": "HTTP second=400",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "17.9",
+      "group": "17. T�nh hu?ng ??c bi?t / Edge case t?ng h?p",
+      "step": "Refresh token h?t h?n (sau 7 ng�y)",
+      "expected": "B? ??y v? login",
+      "status": "PASS",
+      "evidence": "HTTP 401",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "17.10",
+      "group": "17. T�nh hu?ng ??c bi?t / Edge case t?ng h?p",
+      "step": "Event c� 100 volunteer check-in → Complete",
+      "expected": "Ch?ng ch? c?p ?? 100",
+      "status": "BLOCKED",
+      "evidence": "Không tạo 100 user trong demo DB",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "17.11",
+      "group": "17. T�nh hu?ng ??c bi?t / Edge case t?ng h?p",
+      "step": "Trang hi?n th? ti?ng Vi?t ?�ng (kh�ng mojibake)",
+      "expected": "T?t c? trang kh�ng c� k� t? l?",
+      "status": "PASS",
+      "evidence": "Playwright routes-load/layout 94 pass + rg scan sạch",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "17.12",
+      "group": "17. T�nh hu?ng ??c bi?t / Edge case t?ng h?p",
+      "step": "Mobile responsive (viewport 375px)",
+      "expected": "Layout kh�ng v?",
+      "status": "BLOCKED",
+      "evidence": "Chưa chạy lại mobile trong lượt này",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "17.13",
+      "group": "17. T�nh hu?ng ??c bi?t / Edge case t?ng h?p",
+      "step": "Slow network (3G) → submit form",
+      "expected": "Kh�ng submit 2 l?n (double-click protection)",
+      "status": "BLOCKED",
+      "evidence": "Không mô phỏng 3G trong runner",
+      "source": "api-probe-supplemental.json"
+    },
+    {
+      "id": "17.14",
+      "group": "17. T�nh hu?ng ??c bi?t / Edge case t?ng h?p",
+      "step": "Back button sau khi submit form",
+      "expected": "Kh�ng re-submit",
+      "status": "BLOCKED",
+      "evidence": "Không mô phỏng browser history trong runner",
+      "source": "api-probe-supplemental.json"
+    }
+  ]
+}

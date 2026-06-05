@@ -1,0 +1,42 @@
+﻿[
+    {
+        "Name":  "ApiGateway",
+        "Project":  "BaseCore.ApiGateway",
+        "Port":  5000,
+        "ProcessId":  8184,
+        "Out":  "D:\\FW\\FW\\BaseCore\\TestResults\\run-20260519-business\\ApiGateway.out.log",
+        "Err":  "D:\\FW\\FW\\BaseCore\\TestResults\\run-20260519-business\\ApiGateway.err.log"
+    },
+    {
+        "Name":  "APIService",
+        "Project":  "BaseCore.APIService",
+        "Port":  5001,
+        "ProcessId":  22608,
+        "Out":  "D:\\FW\\FW\\BaseCore\\TestResults\\run-20260519-business\\APIService.out.log",
+        "Err":  "D:\\FW\\FW\\BaseCore\\TestResults\\run-20260519-business\\APIService.err.log"
+    },
+    {
+        "Name":  "AuthService",
+        "Project":  "BaseCore.AuthService",
+        "Port":  5002,
+        "ProcessId":  18212,
+        "Out":  "D:\\FW\\FW\\BaseCore\\TestResults\\run-20260519-business\\AuthService.out.log",
+        "Err":  "D:\\FW\\FW\\BaseCore\\TestResults\\run-20260519-business\\AuthService.err.log"
+    },
+    {
+        "Name":  "EventService",
+        "Project":  "BaseCore.EventService",
+        "Port":  5003,
+        "ProcessId":  14260,
+        "Out":  "D:\\FW\\FW\\BaseCore\\TestResults\\run-20260519-business\\EventService.out.log",
+        "Err":  "D:\\FW\\FW\\BaseCore\\TestResults\\run-20260519-business\\EventService.err.log"
+    },
+    {
+        "Name":  "FinanceService",
+        "Project":  "BaseCore.FinanceService",
+        "Port":  5004,
+        "ProcessId":  19268,
+        "Out":  "D:\\FW\\FW\\BaseCore\\TestResults\\run-20260519-business\\FinanceService.out.log",
+        "Err":  "D:\\FW\\FW\\BaseCore\\TestResults\\run-20260519-business\\FinanceService.err.log"
+    }
+]
