@@ -1,0 +1,496 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/auth/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/auth/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 200
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/auth",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 200
+    },
+    {
+      "DownstreamPathTemplate": "/api/profile/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/profile/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 190
+    },
+    {
+      "DownstreamPathTemplate": "/api/profile",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/profile",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 190
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/volunteers",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/users/volunteers",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 185
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/users/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 180
+    },
+    {
+      "DownstreamPathTemplate": "/api/users",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/users",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 180
+    },
+    {
+      "DownstreamPathTemplate": "/api/skills/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/skills/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 180
+    },
+    {
+      "DownstreamPathTemplate": "/api/skills",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/skills",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 180
+    },
+    {
+      "DownstreamPathTemplate": "/api/Roles/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/Roles/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 180
+    },
+    {
+      "DownstreamPathTemplate": "/api/Roles",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/Roles",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 180
+    },
+    {
+      "DownstreamPathTemplate": "/api/organizer/verification/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/organizer/verification/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 180
+    },
+    {
+      "DownstreamPathTemplate": "/api/organizer/verification",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/organizer/verification",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 180
+    },
+    {
+      "DownstreamPathTemplate": "/api/uploads/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/uploads/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 180
+    },
+    {
+      "DownstreamPathTemplate": "/api/notifications/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/notifications/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 170
+    },
+    {
+      "DownstreamPathTemplate": "/api/notifications",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/notifications",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 170
+    },
+    {
+      "DownstreamPathTemplate": "/api/badges",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/badges",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 170
+    },
+    {
+      "DownstreamPathTemplate": "/api/my-badges",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/my-badges",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 170
+    },
+    {
+      "DownstreamPathTemplate": "/api/monitoring/health",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/monitoring/health",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 170
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/monitoring/summary",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/admin/monitoring/summary",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 170
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/audit-logs",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/admin/audit-logs",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 170
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/users/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/admin/users/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 170
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/users",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/admin/users",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 170
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/volunteer-kyc/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/admin/volunteer-kyc/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 170
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/volunteer-kyc",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/admin/volunteer-kyc",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 170
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/volunteer-skill-verifications/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/admin/volunteer-skill-verifications/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 170
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/volunteer-skill-verifications",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/admin/volunteer-skill-verifications",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 170
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/organizer-verifications/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/admin/organizer-verifications/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 170
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/organizer-verifications",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/admin/organizer-verifications",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 170
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/ratings",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "eventservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/admin/ratings",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 185
+    },
+    {
+      "DownstreamPathTemplate": "/api/users/{userId}/ratings",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "eventservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/users/{userId}/ratings",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 185
+    },
+    {
+      "DownstreamPathTemplate": "/api/ratings/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "eventservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/ratings/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 160
+    },
+    {
+      "DownstreamPathTemplate": "/api/sponsor/profile",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "financeservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/sponsor/profile",
+      "UpstreamHttpMethod": [ "GET", "PUT", "OPTIONS" ],
+      "Priority": 176
+    },
+    {
+      "DownstreamPathTemplate": "/api/events/{eventId}/support-campaigns/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "financeservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/events/{eventId}/support-campaigns/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 175
+    },
+    {
+      "DownstreamPathTemplate": "/api/events/{eventId}/support-campaigns",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "financeservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/events/{eventId}/support-campaigns",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 175
+    },
+    {
+      "DownstreamPathTemplate": "/api/events/{eventId}/sponsors/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "financeservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/events/{eventId}/sponsors/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 175
+    },
+    {
+      "DownstreamPathTemplate": "/api/events/{eventId}/sponsors",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "financeservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/events/{eventId}/sponsors",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 175
+    },
+    {
+      "DownstreamPathTemplate": "/api/events/{eventId}/sponsorship-proposals/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "financeservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/events/{eventId}/sponsorship-proposals/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 175
+    },
+    {
+      "DownstreamPathTemplate": "/api/events/{eventId}/sponsorship-proposals",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "financeservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/events/{eventId}/sponsorship-proposals",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 175
+    },
+    {
+      "DownstreamPathTemplate": "/api/events/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "eventservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/events/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 160
+    },
+    {
+      "DownstreamPathTemplate": "/api/events",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "eventservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/events",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 160
+    },
+    {
+      "DownstreamPathTemplate": "/api/event-categories/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "eventservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/event-categories/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 160
+    },
+    {
+      "DownstreamPathTemplate": "/api/event-categories",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "eventservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/event-categories",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 160
+    },
+    {
+      "DownstreamPathTemplate": "/api/my-registrations",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "eventservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/my-registrations",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 160
+    },
+    {
+      "DownstreamPathTemplate": "/api/certificates/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "eventservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/certificates/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 160
+    },
+    {
+      "DownstreamPathTemplate": "/api/certificates",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "eventservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/certificates",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 160
+    },
+    {
+      "DownstreamPathTemplate": "/api/channels/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "eventservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/channels/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 160
+    },
+    {
+      "DownstreamPathTemplate": "/api/channels",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "eventservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/channels",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 160
+    },
+    {
+      "DownstreamPathTemplate": "/api/dashboard/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "eventservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/dashboard/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 150
+    },
+    {
+      "DownstreamPathTemplate": "/api/dashboard",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "eventservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/dashboard",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 150
+    },
+    {
+      "DownstreamPathTemplate": "/api/support-campaigns/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "financeservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/support-campaigns/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 140
+    },
+    {
+      "DownstreamPathTemplate": "/api/donations/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "financeservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/donations/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 140
+    },
+    {
+      "DownstreamPathTemplate": "/api/donations/my",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "financeservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/donations/my",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 140
+    },
+    {
+      "DownstreamPathTemplate": "/api/sponsors/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "financeservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/sponsors/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 140
+    },
+    {
+      "DownstreamPathTemplate": "/api/sponsors",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "financeservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/sponsors",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 140
+    },
+    {
+      "DownstreamPathTemplate": "/api/sponsorship-proposals/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "financeservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/sponsorship-proposals/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 140
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/finance/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "financeservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/admin/finance/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 140
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/export/finance",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "financeservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/admin/export/finance",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 140
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/export/events",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "apiservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/admin/export/events",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 130
+    },
+    {
+      "DownstreamPathTemplate": "/api/admin/export/users",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "authservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/admin/export/users",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 130
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [{ "Host": "apiservice", "Port": 8080 }],
+      "UpstreamPathTemplate": "/api/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
+      "Priority": 1
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://gateway:8080"
+  }
+}
+
