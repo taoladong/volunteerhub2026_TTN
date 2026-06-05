@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using AuthService.Contracts;
 using AuthService.Data;
 using AuthService.Entities;
@@ -17,6 +18,10 @@ public class AuthController : ControllerBase
         "Volunteer",
         "Organizer"
     };
+
+    private static readonly Regex EmailRegex = new(
+        @"^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$",
+        RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
     private readonly AuthDbContext _dbContext;
     private readonly IPasswordHashingService _passwordHashingService;
@@ -80,6 +85,11 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<ActionResult<AuthResponse>> Login(LoginRequest request, CancellationToken cancellationToken)
     {
+        if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
+        {
+            return BadRequest(new { message = "Email and password are required." });
+        }
+
         var email = NormalizeEmail(request.Email);
         var user = await LoadUserByEmailAsync(email, cancellationToken);
         if (user is null ||
@@ -221,19 +231,31 @@ public class AuthController : ControllerBase
 
     private static string? ValidateRegisterRequest(RegisterRequest request, string normalizedEmail)
     {
-        if (string.IsNullOrWhiteSpace(normalizedEmail) || !normalizedEmail.Contains('@'))
+        if (string.IsNullOrWhiteSpace(normalizedEmail) || !EmailRegex.IsMatch(normalizedEmail))
         {
             return "A valid email is required.";
         }
 
-        if (string.IsNullOrWhiteSpace(request.FullName))
+        var fullName = request.FullName?.Trim();
+        if (string.IsNullOrEmpty(fullName) || fullName.Length < 2)
         {
-            return "Full name is required.";
+            return "Full name must be at least 2 characters.";
         }
 
-        if (string.IsNullOrWhiteSpace(request.Password) || request.Password.Length < 8)
+        if (fullName.Length > 100)
+        {
+            return "Full name must not exceed 100 characters.";
+        }
+
+        var password = request.Password;
+        if (string.IsNullOrWhiteSpace(password) || password.Length < 8)
         {
             return "Password must be at least 8 characters.";
+        }
+
+        if (!password.Any(char.IsDigit) || !password.Any(char.IsLetter))
+        {
+            return "Password must contain both letters and digits.";
         }
 
         return null;
