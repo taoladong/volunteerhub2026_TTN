@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FAFAFA"/>
+      <stop offset="100%" stop-color="#F5F5F5"/>
+    </linearGradient>
+    <linearGradient id="cardImg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dbeafe"/>
+      <stop offset="100%" stop-color="#bfdbfe"/>
+    </linearGradient>
+    <linearGradient id="cardImg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#dcfce7"/>
+      <stop offset="100%" stop-color="#bbf7d0"/>
+    </linearGradient>
+    <linearGradient id="cardImg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#fde68a"/>
+    </linearGradient>
+    <filter id="softShadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.5"/>
+      <feOffset dx="0" dy="1"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.04"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Browser frame -->
+  <rect x="0" y="0" width="800" height="560" rx="14" fill="url(#bg)" stroke="rgba(15,15,15,0.08)" stroke-width="1"/>
+
+  <!-- Top bar -->
+  <rect x="0" y="0" width="800" height="42" rx="14" fill="#ffffff"/>
+  <rect x="0" y="28" width="800" height="14" fill="#ffffff"/>
+  <line x1="0" y1="42" x2="800" y2="42" stroke="rgba(15,15,15,0.08)" stroke-width="1"/>
+  <circle cx="18" cy="21" r="5" fill="#fca5a5"/>
+  <circle cx="36" cy="21" r="5" fill="#fde68a"/>
+  <circle cx="54" cy="21" r="5" fill="#86efac"/>
+  <rect x="320" y="13" width="160" height="16" rx="8" fill="rgba(15,15,15,0.04)"/>
+
+  <!-- Sidebar -->
+  <rect x="0" y="42" width="180" height="518" fill="#181d26"/>
+
+  <!-- Logo -->
+  <rect x="20" y="60" width="22" height="22" rx="5" fill="#1b61c9"/>
+  <rect x="50" y="66" width="92" height="10" rx="2" fill="rgba(255,255,255,0.9)"/>
+
+  <!-- User card -->
+  <line x1="20" y1="100" x2="160" y2="100" stroke="rgba(255,255,255,0.07)"/>
+  <circle cx="33" cy="124" r="13" fill="#1b61c9"/>
+  <rect x="52" y="116" width="80" height="8" rx="2" fill="rgba(255,255,255,0.85)"/>
+  <rect x="52" y="128" width="56" height="8" rx="4" fill="rgba(122,170,245,0.4)"/>
+
+  <!-- Nav items -->
+  <line x1="20" y1="150" x2="160" y2="150" stroke="rgba(255,255,255,0.07)"/>
+  <!-- active -->
+  <rect x="14" y="160" width="152" height="32" rx="8" fill="rgba(27,97,201,0.30)"/>
+  <rect x="26" y="170" width="14" height="14" rx="3" fill="rgba(255,255,255,0.9)"/>
+  <rect x="46" y="174" width="76" height="7" rx="2" fill="rgba(255,255,255,0.95)"/>
+
+  <rect x="26" y="206" width="14" height="14" rx="3" fill="rgba(255,255,255,0.5)"/>
+  <rect x="46" y="210" width="68" height="7" rx="2" fill="rgba(255,255,255,0.6)"/>
+
+  <rect x="26" y="242" width="14" height="14" rx="3" fill="rgba(255,255,255,0.5)"/>
+  <rect x="46" y="246" width="58" height="7" rx="2" fill="rgba(255,255,255,0.6)"/>
+
+  <rect x="26" y="278" width="14" height="14" rx="3" fill="rgba(255,255,255,0.5)"/>
+  <rect x="46" y="282" width="42" height="7" rx="2" fill="rgba(255,255,255,0.6)"/>
+
+  <rect x="26" y="314" width="14" height="14" rx="3" fill="rgba(255,255,255,0.5)"/>
+  <rect x="46" y="318" width="62" height="7" rx="2" fill="rgba(255,255,255,0.6)"/>
+
+  <!-- Main content -->
+  <!-- Greeting -->
+  <rect x="216" y="70" width="280" height="20" rx="3" fill="#0F0F0F"/>
+  <rect x="216" y="100" width="200" height="10" rx="2" fill="rgba(15,15,15,0.35)"/>
+
+  <!-- Section: Hôm nay -->
+  <rect x="216" y="140" width="58" height="8" rx="2" fill="rgba(15,15,15,0.35)"/>
+
+  <!-- Action row 1 (warning amber) -->
+  <rect x="216" y="158" width="544" height="56" rx="8" fill="#fffbeb" stroke="rgba(217,119,6,0.25)" stroke-width="1" filter="url(#softShadow)"/>
+  <rect x="232" y="178" width="34" height="18" rx="2" fill="#b45309"/>
+  <text x="232" y="192" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#ffffff" text-anchor="start">09:00</text>
+  <rect x="282" y="170" width="240" height="9" rx="2" fill="#0F0F0F"/>
+  <rect x="282" y="186" width="150" height="7" rx="2" fill="rgba(15,15,15,0.45)"/>
+  <rect x="660" y="178" width="84" height="18" rx="4" fill="#b45309"/>
+  <text x="702" y="191" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#ffffff" text-anchor="middle">Điểm danh →</text>
+
+  <!-- Action row 2 (neutral) -->
+  <rect x="216" y="224" width="544" height="56" rx="8" fill="#ffffff" stroke="rgba(15,15,15,0.08)" stroke-width="1" filter="url(#softShadow)"/>
+  <rect x="232" y="245" width="14" height="14" rx="3" fill="rgba(15,15,15,0.35)"/>
+  <rect x="260" y="240" width="230" height="9" rx="2" fill="#0F0F0F"/>
+  <rect x="260" y="256" width="180" height="7" rx="2" fill="rgba(15,15,15,0.45)"/>
+  <rect x="660" y="248" width="84" height="14" rx="3" fill="transparent"/>
+  <text x="702" y="259" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#1b61c9" text-anchor="middle">Cập nhật →</text>
+
+  <!-- Section: Sự kiện đề xuất -->
+  <rect x="216" y="312" width="100" height="8" rx="2" fill="rgba(15,15,15,0.35)"/>
+  <rect x="700" y="312" width="60" height="8" rx="2" fill="#1b61c9"/>
+
+  <!-- Event cards row -->
+  <!-- Card 1 -->
+  <rect x="216" y="332" width="172" height="180" rx="8" fill="#ffffff" stroke="rgba(15,15,15,0.08)" stroke-width="1" filter="url(#softShadow)"/>
+  <rect x="216" y="332" width="172" height="96" rx="8" fill="url(#cardImg1)"/>
+  <path d="M260 380 a16 16 0 0 1 32 0 a16 16 0 0 1 -32 0" fill="rgba(255,255,255,0.4)"/>
+  <rect x="228" y="438" width="148" height="9" rx="2" fill="#0F0F0F"/>
+  <rect x="228" y="454" width="120" height="8" rx="2" fill="#0F0F0F"/>
+  <rect x="228" y="472" width="80" height="7" rx="2" fill="rgba(15,15,15,0.45)"/>
+  <rect x="228" y="488" width="92" height="8" rx="2" fill="#1b61c9"/>
+
+  <!-- Card 2 -->
+  <rect x="402" y="332" width="172" height="180" rx="8" fill="#ffffff" stroke="rgba(15,15,15,0.08)" stroke-width="1" filter="url(#softShadow)"/>
+  <rect x="402" y="332" width="172" height="96" rx="8" fill="url(#cardImg2)"/>
+  <path d="M470 388 l8 -10 l8 10 l-8 10 z" fill="rgba(255,255,255,0.5)"/>
+  <path d="M482 380 l8 -10 l8 10 l-8 10 z" fill="rgba(255,255,255,0.4)"/>
+  <rect x="414" y="438" width="148" height="9" rx="2" fill="#0F0F0F"/>
+  <rect x="414" y="454" width="110" height="8" rx="2" fill="#0F0F0F"/>
+  <rect x="414" y="472" width="68" height="7" rx="2" fill="rgba(15,15,15,0.45)"/>
+  <rect x="414" y="488" width="78" height="8" rx="2" fill="#1b61c9"/>
+
+  <!-- Card 3 -->
+  <rect x="588" y="332" width="172" height="180" rx="8" fill="#ffffff" stroke="rgba(15,15,15,0.08)" stroke-width="1" filter="url(#softShadow)"/>
+  <rect x="588" y="332" width="172" height="96" rx="8" fill="url(#cardImg3)"/>
+  <circle cx="674" cy="380" r="14" fill="rgba(255,255,255,0.5)"/>
+  <rect x="600" y="438" width="148" height="9" rx="2" fill="#0F0F0F"/>
+  <rect x="600" y="454" width="116" height="8" rx="2" fill="#0F0F0F"/>
+  <rect x="600" y="472" width="72" height="7" rx="2" fill="rgba(15,15,15,0.45)"/>
+  <rect x="600" y="488" width="84" height="8" rx="2" fill="#1b61c9"/>
+</svg>
