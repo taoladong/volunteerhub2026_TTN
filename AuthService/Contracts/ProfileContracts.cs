@@ -8,7 +8,10 @@ public record ProfileUpsertRequest(
     string? Gender,
     string? Address,
     string? Bio,
-    string? AvatarUrl);
+    string? AvatarUrl,
+    string? BloodType,
+    string? Languages,
+    string? Interests);
 
 public record ProfileResponse(
     int Id,
@@ -30,7 +33,10 @@ public record ProfileSkillRequest(
     string? Name,
     string? Description,
     int? YearsOfExperience,
-    string? Note);
+    string? Note,
+    string? Level,
+    string? EvidenceUrl,
+    string? VerificationNote);
 
 public record ProfileSkillResponse(
     int SkillId,
@@ -38,13 +44,20 @@ public record ProfileSkillResponse(
     string? Description,
     int? YearsOfExperience,
     string? Note,
-    VerificationStatus VerificationStatus);
+    VerificationStatus VerificationStatus,
+    string? Level,
+    string? EvidenceUrl,
+    string? VerificationNote);
 
 public record KycSubmitRequest(
-    string LegalFullName,
-    string IdentityNumber,
+    string? LegalFullName,
+    string? IdentityNumber,
     string? DocumentFrontUrl,
-    string? DocumentBackUrl);
+    string? DocumentBackUrl,
+    string? IdentityFrontImageUrl,
+    string? IdentityBackImageUrl,
+    string? PortraitImageUrl,
+    bool ConfirmReverify);
 
 public record KycSubmissionResponse(
     int Id,
