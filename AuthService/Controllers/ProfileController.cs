@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using AuthService.Contracts;
 using AuthService.Data;
 using AuthService.Entities;
@@ -13,6 +14,24 @@ namespace AuthService.Controllers;
 [Route("api/profile")]
 public class ProfileController : ControllerBase
 {
+    private const int BioMaxLength = 500;
+    private const int AddressMaxLength = 250;
+
+    private static readonly Regex PhoneRegex = new(
+        @"^\+?[0-9]{9,15}$",
+        RegexOptions.Compiled);
+
+    private static readonly Regex IdentityNumberRegex = new(
+        @"^[0-9]{9,12}$",
+        RegexOptions.Compiled);
+
+    private static readonly HashSet<string> AllowedGenders = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "Male",
+        "Female",
+        "Other"
+    };
+
     private readonly AuthDbContext _dbContext;
 
     public ProfileController(AuthDbContext dbContext)
@@ -43,6 +62,12 @@ public class ProfileController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ProfileResponse>> Create(ProfileUpsertRequest request, CancellationToken cancellationToken)
     {
+        var profileValidationError = ValidateProfileRequest(request);
+        if (profileValidationError is not null)
+        {
+            return BadRequest(new { message = profileValidationError });
+        }
+
         var userId = User.GetRequiredUserId();
         var exists = await _dbContext.VolunteerProfiles.AnyAsync(profile => profile.UserId == userId, cancellationToken);
         if (exists)
@@ -63,6 +88,12 @@ public class ProfileController : ControllerBase
     [HttpPut("me")]
     public async Task<ActionResult<ProfileResponse>> UpdateMe(ProfileUpsertRequest request, CancellationToken cancellationToken)
     {
+        var profileValidationError = ValidateProfileRequest(request);
+        if (profileValidationError is not null)
+        {
+            return BadRequest(new { message = profileValidationError });
+        }
+
         var userId = User.GetRequiredUserId();
         var profile = await _dbContext.VolunteerProfiles.FirstOrDefaultAsync(entity => entity.UserId == userId, cancellationToken);
         if (profile is null)
@@ -212,6 +243,12 @@ public class ProfileController : ControllerBase
     [HttpPost("kyc")]
     public async Task<ActionResult<KycSubmissionResponse>> SubmitKyc(KycSubmitRequest request, CancellationToken cancellationToken)
     {
+        var kycValidationError = ValidateKycRequest(request);
+        if (kycValidationError is not null)
+        {
+            return BadRequest(new { message = kycValidationError });
+        }
+
         var userId = User.GetRequiredUserId();
         var user = await _dbContext.Users.FirstOrDefaultAsync(entity => entity.Id == userId, cancellationToken);
         var profile = await GetOrCreateProfileAsync(userId, cancellationToken);
@@ -332,6 +369,92 @@ public class ProfileController : ControllerBase
         profile.Address = NormalizeOptional(request.Address);
         profile.Bio = NormalizeOptional(request.Bio);
         profile.AvatarUrl = NormalizeOptional(request.AvatarUrl);
+    }
+
+    private static string? ValidateProfileRequest(ProfileUpsertRequest request)
+    {
+        var phone = NormalizeOptional(request.PhoneNumber);
+        if (phone is not null && !PhoneRegex.IsMatch(phone))
+        {
+            return "Phone number must contain 9-15 digits and may start with '+'.";
+        }
+
+        if (request.DateOfBirth is { } dateOfBirth)
+        {
+            if (dateOfBirth > DateTime.UtcNow.Date)
+            {
+                return "Date of birth must be in the past.";
+            }
+
+            if (dateOfBirth.Year < 1900)
+            {
+                return "Date of birth must be after 1900.";
+            }
+        }
+
+        var gender = NormalizeOptional(request.Gender);
+        if (gender is not null && !AllowedGenders.Contains(gender))
+        {
+            return "Gender must be Male, Female, or Other.";
+        }
+
+        var bio = NormalizeOptional(request.Bio);
+        if (bio is not null && bio.Length > BioMaxLength)
+        {
+            return $"Bio must not exceed {BioMaxLength} characters.";
+        }
+
+        var address = NormalizeOptional(request.Address);
+        if (address is not null && address.Length > AddressMaxLength)
+        {
+            return $"Address must not exceed {AddressMaxLength} characters.";
+        }
+
+        var avatarUrl = NormalizeOptional(request.AvatarUrl);
+        if (avatarUrl is not null && !IsValidHttpUrl(avatarUrl))
+        {
+            return "Avatar URL must be a valid http(s) URL.";
+        }
+
+        return null;
+    }
+
+    private static string? ValidateKycRequest(KycSubmitRequest request)
+    {
+        var legalFullName = NormalizeOptional(request.LegalFullName);
+        if (legalFullName is not null && legalFullName.Length > 100)
+        {
+            return "Legal full name must not exceed 100 characters.";
+        }
+
+        var identityNumber = NormalizeOptional(request.IdentityNumber);
+        if (identityNumber is not null && !IdentityNumberRegex.IsMatch(identityNumber))
+        {
+            return "Identity number must contain 9-12 digits.";
+        }
+
+        foreach (var url in new[]
+                 {
+                     NormalizeOptional(request.DocumentFrontUrl),
+                     NormalizeOptional(request.DocumentBackUrl),
+                     NormalizeOptional(request.IdentityFrontImageUrl),
+                     NormalizeOptional(request.IdentityBackImageUrl),
+                     NormalizeOptional(request.PortraitImageUrl)
+                 })
+        {
+            if (url is not null && !IsValidHttpUrl(url))
+            {
+                return "KYC document URLs must be valid http(s) URLs.";
+            }
+        }
+
+        return null;
+    }
+
+    private static bool IsValidHttpUrl(string value)
+    {
+        return Uri.TryCreate(value, UriKind.Absolute, out var uri)
+            && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps);
     }
 
     private static string? ValidateSkillRequest(ProfileSkillRequest request)
