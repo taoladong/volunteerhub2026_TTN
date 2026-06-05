@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 480" fill="none">
+  <defs>
+    <linearGradient id="sBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FAFAFA"/>
+      <stop offset="100%" stop-color="#F5F5F5"/>
+    </linearGradient>
+    <linearGradient id="sChart" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1b61c9" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#1b61c9" stop-opacity="0.05"/>
+    </linearGradient>
+    <filter id="sShadow"><feGaussianBlur in="SourceAlpha" stdDeviation="1.2"/><feOffset dx="0" dy="1"/><feComponentTransfer><feFuncA type="linear" slope="0.05"/></feComponentTransfer><feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+
+  <rect x="0" y="0" width="700" height="480" rx="12" fill="url(#sBg)" stroke="rgba(15,15,15,0.08)"/>
+
+  <!-- Top bar -->
+  <rect x="0" y="0" width="700" height="36" rx="12" fill="#ffffff"/>
+  <rect x="0" y="24" width="700" height="12" fill="#ffffff"/>
+  <line x1="0" y1="36" x2="700" y2="36" stroke="rgba(15,15,15,0.08)"/>
+  <circle cx="16" cy="18" r="4" fill="#fca5a5"/>
+  <circle cx="30" cy="18" r="4" fill="#fde68a"/>
+  <circle cx="44" cy="18" r="4" fill="#86efac"/>
+
+  <!-- Header -->
+  <rect x="40" y="60" width="220" height="16" rx="3" fill="#0F0F0F"/>
+  <rect x="40" y="84" width="180" height="9" rx="2" fill="rgba(15,15,15,0.45)"/>
+
+  <!-- Big number card -->
+  <rect x="40" y="118" width="300" height="120" rx="8" fill="#ffffff" stroke="rgba(15,15,15,0.08)" filter="url(#sShadow)"/>
+  <rect x="60" y="140" width="80" height="8" rx="2" fill="rgba(15,15,15,0.45)"/>
+  <rect x="60" y="156" width="180" height="26" rx="3" fill="#15803d"/>
+  <rect x="60" y="194" width="120" height="9" rx="2" fill="rgba(15,15,15,0.45)"/>
+  <rect x="60" y="210" width="160" height="8" rx="2" fill="#1b61c9"/>
+
+  <!-- Chart card -->
+  <rect x="360" y="118" width="300" height="120" rx="8" fill="#ffffff" stroke="rgba(15,15,15,0.08)" filter="url(#sShadow)"/>
+  <rect x="380" y="138" width="100" height="8" rx="2" fill="#0F0F0F"/>
+  <path d="M 380 220 L 380 200 L 400 190 L 420 196 L 440 178 L 460 184 L 480 168 L 500 174 L 520 158 L 540 162 L 560 148 L 580 152 L 600 138 L 620 144 L 640 132 L 640 220 Z" fill="url(#sChart)"/>
+  <path d="M 380 200 L 400 190 L 420 196 L 440 178 L 460 184 L 480 168 L 500 174 L 520 158 L 540 162 L 560 148 L 580 152 L 600 138 L 620 144 L 640 132" stroke="#1b61c9" stroke-width="2" fill="none"/>
+
+  <!-- List header -->
+  <rect x="40" y="262" width="120" height="9" rx="2" fill="rgba(15,15,15,0.45)"/>
+
+  <!-- Sponsorship rows -->
+  <rect x="40" y="282" width="620" height="56" rx="8" fill="#ffffff" stroke="rgba(15,15,15,0.08)" filter="url(#sShadow)"/>
+  <rect x="60" y="298" width="20" height="20" rx="4" fill="#fef3c7"/>
+  <rect x="90" y="296" width="180" height="10" rx="2" fill="#0F0F0F"/>
+  <rect x="90" y="312" width="120" height="7" rx="2" fill="rgba(15,15,15,0.45)"/>
+  <rect x="500" y="304" width="100" height="10" rx="2" fill="#0F0F0F"/>
+  <rect x="610" y="298" width="36" height="20" rx="10" fill="#dcfce7"/>
+
+  <rect x="40" y="346" width="620" height="56" rx="8" fill="#ffffff" stroke="rgba(15,15,15,0.08)" filter="url(#sShadow)"/>
+  <rect x="60" y="362" width="20" height="20" rx="4" fill="#dbeafe"/>
+  <rect x="90" y="360" width="160" height="10" rx="2" fill="#0F0F0F"/>
+  <rect x="90" y="376" width="140" height="7" rx="2" fill="rgba(15,15,15,0.45)"/>
+  <rect x="500" y="368" width="100" height="10" rx="2" fill="#0F0F0F"/>
+  <rect x="610" y="362" width="36" height="20" rx="10" fill="#fef3c7"/>
+
+  <rect x="40" y="410" width="620" height="56" rx="8" fill="#ffffff" stroke="rgba(15,15,15,0.08)" filter="url(#sShadow)"/>
+  <rect x="60" y="426" width="20" height="20" rx="4" fill="#dcfce7"/>
+  <rect x="90" y="424" width="200" height="10" rx="2" fill="#0F0F0F"/>
+  <rect x="90" y="440" width="100" height="7" rx="2" fill="rgba(15,15,15,0.45)"/>
+  <rect x="500" y="432" width="100" height="10" rx="2" fill="#0F0F0F"/>
+  <rect x="610" y="426" width="36" height="20" rx="10" fill="#dcfce7"/>
+</svg>
