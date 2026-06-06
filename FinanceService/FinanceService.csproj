@@ -14,6 +14,15 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.8" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BaseCore.Entities\BaseCore.Entities.csproj" />
+    <ProjectReference Include="..\BaseCore.Repository\BaseCore.Repository.csproj" />
+    <ProjectReference Include="..\BaseCore.Services\BaseCore.Services.csproj" />
+    <ProjectReference Include="..\BaseCore.DTO\BaseCore.DTO.csproj" />
+    <ProjectReference Include="..\BaseCore.Common\BaseCore.Common.csproj" />
   </ItemGroup>
 
 </Project>
