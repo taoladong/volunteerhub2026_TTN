@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 
-namespace BaseCore.APIService.Controllers
+namespace FinanceService.Controllers
 {
     [ApiController]
     public class SponsorshipProposalController : ControllerBase
@@ -407,7 +407,7 @@ namespace BaseCore.APIService.Controllers
             return role == "Admin" || proposal.SponsorId == userId || proposal.OrganizerId == userId;
         }
 
-        private bool CanManageEvent(Entities.Event ev, int userId)
+        private bool CanManageEvent(BaseCore.Entities.Event ev, int userId)
         {
             var role = GetRole();
             return role == "Admin" || ev.OrganizerId == userId;

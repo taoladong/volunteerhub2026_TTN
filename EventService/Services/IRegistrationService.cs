@@ -1,4 +1,4 @@
-using EventService.Entities;
+using BaseCore.Entities;
 
 namespace EventService.Services
 {

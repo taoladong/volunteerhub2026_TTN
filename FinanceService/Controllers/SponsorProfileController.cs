@@ -5,7 +5,7 @@ using BaseCore.Repository;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-namespace BaseCore.APIService.Controllers
+namespace FinanceService.Controllers
 {
     [Route("api/sponsor/profile")]
     [ApiController]

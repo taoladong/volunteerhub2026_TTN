@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
-using EventService.Entities;
-using EventService.Data;
+using BaseCore.Entities;
+using BaseCore.Repository;
 using EventService.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -17,14 +17,14 @@ namespace EventService.Controllers
         private readonly IRegistrationService _registrationService;
         private readonly IAuditLogService _auditLogService;
         private readonly INotificationService _notificationService;
-        private readonly EventDbContext _context;
+        private readonly MySqlDbContext _context;
 
         public EventsController(
             IEventService eventService,
             IRegistrationService registrationService,
             IAuditLogService auditLogService,
             INotificationService notificationService,
-            EventDbContext context)
+            MySqlDbContext context)
         {
             _eventService = eventService;
             _registrationService = registrationService;
@@ -216,7 +216,7 @@ namespace EventService.Controllers
             if (radiusError != null)
                 return BadRequest(new { message = radiusError });
 
-            var ev = new Entities.Event
+            var ev = new BaseCore.Entities.Event
             {
                 Title = dto.Title.Trim(), Description = dto.Description ?? "", Location = dto.Location ?? "",
                 Latitude = dto.Latitude, Longitude = dto.Longitude,

@@ -1,5 +1,5 @@
-using EventService.Data;
-using EventService.Entities;
+using BaseCore.Repository;
+using BaseCore.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseCore.Repository.EFCore;
@@ -32,9 +32,9 @@ public interface IWorkShiftRepositoryEF
 
 public class EventRepositoryEF : IEventRepositoryEF
 {
-    private readonly EventDbContext _context;
+    private readonly MySqlDbContext _context;
 
-    public EventRepositoryEF(EventDbContext context)
+    public EventRepositoryEF(MySqlDbContext context)
     {
         _context = context;
     }
@@ -68,9 +68,9 @@ public class EventRepositoryEF : IEventRepositoryEF
 
 public class EventCategoryRepositoryEF : IEventCategoryRepositoryEF
 {
-    private readonly EventDbContext _context;
+    private readonly MySqlDbContext _context;
 
-    public EventCategoryRepositoryEF(EventDbContext context)
+    public EventCategoryRepositoryEF(MySqlDbContext context)
     {
         _context = context;
     }
@@ -106,9 +106,9 @@ public class EventCategoryRepositoryEF : IEventCategoryRepositoryEF
 
 public class WorkShiftRepositoryEF : IWorkShiftRepositoryEF
 {
-    private readonly EventDbContext _context;
+    private readonly MySqlDbContext _context;
 
-    public WorkShiftRepositoryEF(EventDbContext context)
+    public WorkShiftRepositoryEF(MySqlDbContext context)
     {
         _context = context;
     }

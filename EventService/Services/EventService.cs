@@ -1,24 +1,24 @@
 using Microsoft.EntityFrameworkCore;
-using EventService.Entities;
-using EventService.Data;
+using BaseCore.Entities;
+using BaseCore.Repository;
 using System.Text.Json;
 
 namespace EventService.Services
 {
     public class EventService : IEventService
     {
-        private readonly EventDbContext _context;
+        private readonly MySqlDbContext _context;
         private readonly INotificationService _notificationService;
         private readonly ICertificateService _certificateService;
 
-        public EventService(EventDbContext context, INotificationService notificationService, ICertificateService certificateService)
+        public EventService(MySqlDbContext context, INotificationService notificationService, ICertificateService certificateService)
         {
             _context = context;
             _notificationService = notificationService;
             _certificateService = certificateService;
         }
 
-        public async Task<(List<Entities.Event> Items, int TotalCount)> SearchAsync(
+        public async Task<(List<BaseCore.Entities.Event> Items, int TotalCount)> SearchAsync(
             string? keyword, int? categoryId, string? status,
             DateTime? startDateFrom, int page, int pageSize, int? skillId = null, string? location = null, bool publicOnly = true)
         {
@@ -89,7 +89,7 @@ namespace EventService.Services
             return (items, totalCount);
         }
 
-        public async Task<List<Entities.Event>> GetByOrganizerAsync(int organizerId)
+        public async Task<List<BaseCore.Entities.Event>> GetByOrganizerAsync(int organizerId)
         {
             return await _context.Events
                 .Include(e => e.Category)
@@ -99,7 +99,7 @@ namespace EventService.Services
                 .ToListAsync();
         }
 
-        public async Task<List<Entities.Event>> GetRecommendedAsync(int userId)
+        public async Task<List<BaseCore.Entities.Event>> GetRecommendedAsync(int userId)
         {
             var userSkillIds = await _context.VolunteerSkills
                 .Where(vs => vs.UserId == userId)
@@ -129,7 +129,7 @@ namespace EventService.Services
             return matched;
         }
 
-        public async Task<Entities.Event?> GetByIdAsync(int id)
+        public async Task<BaseCore.Entities.Event?> GetByIdAsync(int id)
         {
             var ev = await _context.Events
                 .Include(e => e.Category)
@@ -142,7 +142,7 @@ namespace EventService.Services
             return ev;
         }
 
-        public async Task<Entities.Event> CreateAsync(Entities.Event ev)
+        public async Task<BaseCore.Entities.Event> CreateAsync(BaseCore.Entities.Event ev)
         {
             ev.Status = "Pending";
             ev.CreatedAt = DateTime.UtcNow;
@@ -151,7 +151,7 @@ namespace EventService.Services
             return ev;
         }
 
-        public async Task UpdateAsync(Entities.Event ev)
+        public async Task UpdateAsync(BaseCore.Entities.Event ev)
         {
             _context.Events.Update(ev);
             await _context.SaveChangesAsync();
@@ -163,7 +163,7 @@ namespace EventService.Services
             if (ev != null) { _context.Events.Remove(ev); await _context.SaveChangesAsync(); }
         }
 
-        public async Task<Entities.Event> ApproveAsync(int eventId)
+        public async Task<BaseCore.Entities.Event> ApproveAsync(int eventId)
         {
             var ev = await _context.Events.FindAsync(eventId)
                 ?? throw new Exception("Event not found");
@@ -208,7 +208,7 @@ namespace EventService.Services
             return ev;
         }
 
-        public async Task<Entities.Event> RejectAsync(int eventId, string? reason)
+        public async Task<BaseCore.Entities.Event> RejectAsync(int eventId, string? reason)
         {
             var ev = await _context.Events.FindAsync(eventId)
                 ?? throw new Exception("Event not found");
@@ -228,7 +228,7 @@ namespace EventService.Services
             return ev;
         }
 
-        public async Task<Entities.Event> CompleteAsync(int eventId, int? organizerId = null)
+        public async Task<BaseCore.Entities.Event> CompleteAsync(int eventId, int? organizerId = null)
         {
             var ev = await _context.Events.FindAsync(eventId)
                 ?? throw new Exception("Event not found");
@@ -246,7 +246,7 @@ namespace EventService.Services
             return ev;
         }
 
-        public async Task<Entities.Event> ResubmitAsync(int eventId, int organizerId)
+        public async Task<BaseCore.Entities.Event> ResubmitAsync(int eventId, int organizerId)
         {
             var ev = await _context.Events.FindAsync(eventId)
                 ?? throw new Exception("Event not found");
@@ -258,7 +258,7 @@ namespace EventService.Services
             return ev;
         }
 
-        public async Task<Entities.Event> CancelAsync(int eventId, int? organizerId, string? reason)
+        public async Task<BaseCore.Entities.Event> CancelAsync(int eventId, int? organizerId, string? reason)
         {
             var ev = await _context.Events.FindAsync(eventId)
                 ?? throw new Exception("Event not found");
@@ -392,7 +392,7 @@ namespace EventService.Services
             }
         }
 
-        public async Task<Entities.Event> UncompleteAsync(int eventId)
+        public async Task<BaseCore.Entities.Event> UncompleteAsync(int eventId)
         {
             var ev = await _context.Events.FindAsync(eventId)
                 ?? throw new Exception("Event not found");

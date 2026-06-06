@@ -2,7 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using AuthService.Entities;
+using BaseCore.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -33,11 +33,10 @@ public class TokenService : ITokenService
             new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(ClaimTypes.Email, user.Email),
-            new(ClaimTypes.Name, user.FullName),
+            new(ClaimTypes.Name, user.FullName ?? ""),
+            new(ClaimTypes.Role, user.RoleName),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N"))
         };
-
-        claims.AddRange(user.UserRoles.Select(userRole => new Claim(ClaimTypes.Role, userRole.Role.Name)));
 
         var descriptor = new SecurityTokenDescriptor
         {

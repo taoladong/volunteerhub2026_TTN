@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using AuthService.Contracts;
-using AuthService.Data;
-using AuthService.Entities;
+using BaseCore.Repository;
+using BaseCore.Entities;
 using AuthService.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,9 +32,9 @@ public class ProfileController : ControllerBase
         "Other"
     };
 
-    private readonly AuthDbContext _dbContext;
+    private readonly MySqlDbContext _dbContext;
 
-    public ProfileController(AuthDbContext dbContext)
+    public ProfileController(MySqlDbContext dbContext)
     {
         _dbContext = dbContext;
     }
@@ -184,7 +184,7 @@ public class ProfileController : ControllerBase
         volunteerSkill.Note = NormalizeOptional(request.VerificationNote) ?? NormalizeOptional(request.Note);
         if (!string.IsNullOrWhiteSpace(request.EvidenceUrl) || !string.IsNullOrWhiteSpace(request.VerificationNote))
         {
-            volunteerSkill.VerificationStatus = VerificationStatus.Pending;
+            volunteerSkill.VerificationStatus = "Pending";
         }
 
         await _dbContext.SaveChangesAsync(cancellationToken);
@@ -213,7 +213,7 @@ public class ProfileController : ControllerBase
         }
 
         volunteerSkill.Note = NormalizeOptional(request.VerificationNote) ?? NormalizeOptional(request.Note) ?? volunteerSkill.Note;
-        volunteerSkill.VerificationStatus = VerificationStatus.Pending;
+        volunteerSkill.VerificationStatus = "Pending";
 
         await _dbContext.SaveChangesAsync(cancellationToken);
         return Ok(ToProfileSkillResponse(volunteerSkill));
@@ -253,7 +253,7 @@ public class ProfileController : ControllerBase
         var user = await _dbContext.Users.FirstOrDefaultAsync(entity => entity.Id == userId, cancellationToken);
         var profile = await GetOrCreateProfileAsync(userId, cancellationToken);
         var hasPendingSubmission = await _dbContext.KycSubmissions.AnyAsync(
-            submission => submission.VolunteerProfileId == profile.Id && submission.Status == VerificationStatus.Pending,
+            submission => submission.VolunteerProfileId == profile.Id && submission.Status == "Pending",
             cancellationToken);
 
         if (hasPendingSubmission && !request.ConfirmReverify)
@@ -273,10 +273,10 @@ public class ProfileController : ControllerBase
             IdentityNumber = identityNumber,
             DocumentFrontUrl = documentFrontUrl,
             DocumentBackUrl = documentBackUrl,
-            Status = VerificationStatus.Pending
+            Status = "Pending"
         };
 
-        profile.KycStatus = VerificationStatus.Pending;
+        profile.KycStatus = "Pending";
         profile.UpdatedAt = DateTime.UtcNow;
 
         _dbContext.KycSubmissions.Add(submission);
@@ -307,7 +307,7 @@ public class ProfileController : ControllerBase
             totalHours = 0,
             totalEvents = 0,
             totalCertificates = 0,
-            verifiedSkills = profile.VolunteerSkills.Count(skill => skill.VerificationStatus == VerificationStatus.Approved),
+            verifiedSkills = profile.VolunteerSkills.Count(skill => skill.VerificationStatus == "Verified"),
             kycStatus = profile.KycStatus,
             recentActivities = Array.Empty<object>()
         });
