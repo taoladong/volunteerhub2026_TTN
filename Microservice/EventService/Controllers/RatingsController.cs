@@ -8,7 +8,7 @@ using BaseCore.Services.VolunteerHub;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-namespace BaseCore.APIService.Controllers
+namespace EventService.Controllers
 {
     [ApiController]
     public class RatingsController : ControllerBase

@@ -467,7 +467,7 @@
     {
       "DownstreamPathTemplate": "/api/admin/export/events",
       "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [{ "Host": "localhost", "Port": 5001 }],
+      "DownstreamHostAndPorts": [{ "Host": "localhost", "Port": 5003 }],
       "UpstreamPathTemplate": "/api/admin/export/events",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
       "Priority": 130
@@ -479,14 +479,6 @@
       "UpstreamPathTemplate": "/api/admin/export/users",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
       "Priority": 130
-    },
-    {
-      "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [{ "Host": "localhost", "Port": 5001 }],
-      "UpstreamPathTemplate": "/api/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "OPTIONS" ],
-      "Priority": 1
     }
   ],
   "GlobalConfiguration": {

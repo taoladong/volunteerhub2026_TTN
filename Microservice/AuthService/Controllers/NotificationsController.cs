@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using BaseCore.Services.VolunteerHub;
 using System.Security.Claims;
 
-namespace BaseCore.APIService.Controllers
+namespace AuthService.Controllers
 {
     [Route("api/notifications")]
     [ApiController]

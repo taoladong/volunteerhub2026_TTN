@@ -7,7 +7,7 @@ using BaseCore.Services.VolunteerHub.Events;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-namespace BaseCore.APIService.Controllers
+namespace EventService.Controllers
 {
     [Route("api/dashboard")]
     [ApiController]
