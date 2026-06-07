@@ -1,6 +1,6 @@
 using AuthService.Contracts;
-using AuthService.Data;
-using AuthService.Entities;
+using BaseCore.Repository;
+using BaseCore.Entities;
 using AuthService.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,9 +23,9 @@ public class SkillsController : ControllerBase
         ("Gây quỹ", "Hỗ trợ vận động tài trợ và quản lý hoạt động quyên góp.")
     };
 
-    private readonly AuthDbContext _dbContext;
+    private readonly MySqlDbContext _dbContext;
 
-    public SkillsController(AuthDbContext dbContext)
+    public SkillsController(MySqlDbContext dbContext)
     {
         _dbContext = dbContext;
     }

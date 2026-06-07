@@ -20,6 +20,7 @@ namespace BaseCore.Repository
         public DbSet<Skill> Skills { get; set; }
         public DbSet<VolunteerProfile> VolunteerProfiles { get; set; }
         public DbSet<VolunteerSkill> VolunteerSkills { get; set; }
+        public DbSet<KycSubmission> KycSubmissions { get; set; }
 
         // --- VolunteerHub: Events ---
         public DbSet<EventCategory> EventCategories { get; set; }

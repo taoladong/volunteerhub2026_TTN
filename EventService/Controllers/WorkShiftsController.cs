@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
-using EventService.Entities;
-using EventService.Data;
+using BaseCore.Entities;
+using BaseCore.Repository;
 using BaseCore.Repository.EFCore;
 using EventService.Services;
 using System.Security.Claims;
@@ -18,9 +18,9 @@ namespace EventService.Controllers
         private readonly IEventRepositoryEF _eventRepo;
         private readonly IAuditLogService _auditLogService;
         private readonly IChannelService _channelService;
-        private readonly EventDbContext _context;
+        private readonly MySqlDbContext _context;
 
-        public WorkShiftsController(IWorkShiftRepositoryEF repo, IEventRepositoryEF eventRepo, IAuditLogService auditLogService, IChannelService channelService, EventDbContext context)
+        public WorkShiftsController(IWorkShiftRepositoryEF repo, IEventRepositoryEF eventRepo, IAuditLogService auditLogService, IChannelService channelService, MySqlDbContext context)
         {
             _repo = repo;
             _eventRepo = eventRepo;

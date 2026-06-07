@@ -8,7 +8,7 @@ using BaseCore.Services.VolunteerHub;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
-namespace BaseCore.APIService.Controllers
+namespace FinanceService.Controllers
 {
     [ApiController]
     public class SponsorController : ControllerBase
@@ -153,7 +153,7 @@ namespace BaseCore.APIService.Controllers
             });
         }
 
-        private static int CalculateProjectProgress(Entities.Event ev)
+        private static int CalculateProjectProgress(BaseCore.Entities.Event ev)
         {
             return ev.Status switch
             {
@@ -167,7 +167,7 @@ namespace BaseCore.APIService.Controllers
             };
         }
 
-        private static List<object> BuildTrackingTimeline(Entities.Event ev, EventSponsor sponsorship)
+        private static List<object> BuildTrackingTimeline(BaseCore.Entities.Event ev, EventSponsor sponsorship)
         {
             var timeline = new List<object>
             {

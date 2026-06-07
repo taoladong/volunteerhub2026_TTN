@@ -1,16 +1,16 @@
 using Microsoft.EntityFrameworkCore;
-using EventService.Entities;
-using EventService.Data;
+using BaseCore.Entities;
+using BaseCore.Repository;
 
 namespace EventService.Services
 {
     public class RegistrationService : IRegistrationService
     {
-        private readonly EventDbContext _context;
+        private readonly MySqlDbContext _context;
         private readonly INotificationService _notificationService;
         private readonly IBadgeService _badgeService;
 
-        public RegistrationService(EventDbContext context, INotificationService notificationService, IBadgeService badgeService)
+        public RegistrationService(MySqlDbContext context, INotificationService notificationService, IBadgeService badgeService)
         {
             _context = context;
             _notificationService = notificationService;
@@ -302,7 +302,7 @@ namespace EventService.Services
                 throw new Exception("Check-in is outside the event attendance window");
         }
 
-        private static void ValidateCheckInProof(Entities.Event ev, string? qrCode, decimal? latitude, decimal? longitude)
+        private static void ValidateCheckInProof(BaseCore.Entities.Event ev, string? qrCode, decimal? latitude, decimal? longitude)
         {
             if (!string.IsNullOrWhiteSpace(ev.QrCode))
             {
@@ -352,7 +352,7 @@ namespace EventService.Services
             await _context.SaveChangesAsync();
         }
 
-        private static bool IsWithinEventRadius(Entities.Event ev, decimal? latitude, decimal? longitude)
+        private static bool IsWithinEventRadius(BaseCore.Entities.Event ev, decimal? latitude, decimal? longitude)
         {
             if (!latitude.HasValue || !longitude.HasValue || !ev.Latitude.HasValue || !ev.Longitude.HasValue)
                 return false;

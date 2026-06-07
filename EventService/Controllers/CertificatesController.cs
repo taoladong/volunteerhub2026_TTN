@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using EventService.Data;
+using BaseCore.Repository;
 using EventService.Services;
 using System.Security.Claims;
 
@@ -10,9 +10,9 @@ namespace EventService.Controllers
     public class CertificatesController : ControllerBase
     {
         private readonly ICertificateService _certificateService;
-        private readonly EventDbContext _context;
+        private readonly MySqlDbContext _context;
 
-        public CertificatesController(ICertificateService certificateService, EventDbContext context)
+        public CertificatesController(ICertificateService certificateService, MySqlDbContext context)
         {
             _certificateService = certificateService;
             _context = context;

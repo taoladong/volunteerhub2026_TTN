@@ -20,5 +20,14 @@ namespace BaseCore.Entities
         public bool IsActive { get; set; }
         public int UserType { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
+
+        // Added for AuthService compatibility
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public string FullName { get => Name; set => Name = value; }
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public string PasswordHash { get => Password; set => Password = value; }
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public string RoleName => UserType switch { 1 => "Organizer", 2 => "Sponsor", 3 => "Admin", _ => "Volunteer" };
+        public virtual VolunteerProfile VolunteerProfile { get; set; }
     }
 }

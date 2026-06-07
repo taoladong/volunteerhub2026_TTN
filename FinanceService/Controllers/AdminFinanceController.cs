@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System.Text;
 
-namespace BaseCore.APIService.Controllers
+namespace FinanceService.Controllers
 {
     [Route("api/admin")]
     [ApiController]

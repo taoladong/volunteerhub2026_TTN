@@ -14,8 +14,13 @@ namespace BaseCore.Entities
         public int? VerificationReviewedBy { get; set; }
         public string AdminNote { get; set; } = "";
 
+        public int? VolunteerProfileId { get; set; }
+        public int? YearsOfExperience { get; set; }
+        public string? Note { get; set; }
+
         // Navigation
-        public User User { get; set; }
-        public Skill Skill { get; set; }
+        public virtual User User { get; set; }
+        public virtual Skill Skill { get; set; }
+        public virtual VolunteerProfile VolunteerProfile { get; set; }
     }
 }

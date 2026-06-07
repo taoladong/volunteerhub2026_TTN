@@ -1,4 +1,4 @@
-﻿using MongoDB.Bson;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using BaseCore.Common;
 using BaseCore.Entities.Audit;
@@ -31,5 +31,8 @@ namespace BaseCore.Entities
 
         public virtual ICollection<Role> Roles { get; set; }
         public virtual ICollection<User> Users { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public virtual Role Role { get => System.Linq.Enumerable.FirstOrDefault(Roles); set { Roles.Clear(); if(value != null) Roles.Add(value); } }
     }
 }

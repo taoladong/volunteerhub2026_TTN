@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using AuthService.Contracts;
-using AuthService.Data;
-using AuthService.Entities;
+using BaseCore.Repository;
+using BaseCore.Entities;
 using AuthService.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,12 +23,12 @@ public class AuthController : ControllerBase
         @"^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$",
         RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
-    private readonly AuthDbContext _dbContext;
+    private readonly MySqlDbContext _dbContext;
     private readonly IPasswordHashingService _passwordHashingService;
     private readonly ITokenService _tokenService;
 
     public AuthController(
-        AuthDbContext dbContext,
+        MySqlDbContext dbContext,
         IPasswordHashingService passwordHashingService,
         ITokenService tokenService)
     {
@@ -59,19 +59,18 @@ public class AuthController : ControllerBase
             return BadRequest(new { message = "Role must be Volunteer or Organizer." });
         }
 
-        var role = await GetOrCreateRoleAsync(roleName, cancellationToken);
+        int userType = roleName.Equals("Organizer", StringComparison.OrdinalIgnoreCase) ? 1 : 0;
+
         var user = new User
         {
             Email = email,
             FullName = request.FullName.Trim(),
             PasswordHash = _passwordHashingService.Hash(request.Password),
-            UserRoles = new List<UserRole>
-            {
-                new() { Role = role }
-            }
+            UserType = userType,
+            UserName = email
         };
 
-        if (string.Equals(role.Name, "Volunteer", StringComparison.OrdinalIgnoreCase))
+        if (userType == 0)
         {
             user.VolunteerProfile = new VolunteerProfile();
         }
@@ -110,22 +109,20 @@ public class AuthController : ControllerBase
             return BadRequest(new { message = "Refresh token is required." });
         }
 
-        var refreshToken = await _dbContext.RefreshTokens
+        var AuthRefreshToken = await _dbContext.AuthRefreshTokens
             .Include(token => token.User)
-                .ThenInclude(user => user.UserRoles)
-                    .ThenInclude(userRole => userRole.Role)
             .FirstOrDefaultAsync(token => token.Token == request.RefreshToken, cancellationToken);
 
-        if (refreshToken is null ||
-            refreshToken.RevokedAt is not null ||
-            refreshToken.ExpiresAt <= DateTime.UtcNow ||
-            !refreshToken.User.IsActive)
+        if (AuthRefreshToken is null ||
+            AuthRefreshToken.RevokedAt is not null ||
+            AuthRefreshToken.ExpiresAt <= DateTime.UtcNow ||
+            !AuthRefreshToken.User.IsActive)
         {
             return Unauthorized(new { message = "Refresh token is invalid or expired." });
         }
 
-        refreshToken.RevokedAt = DateTime.UtcNow;
-        return Ok(await CreateAuthResponseAsync(refreshToken.User, cancellationToken));
+        AuthRefreshToken.RevokedAt = DateTime.UtcNow;
+        return Ok(await CreateAuthResponseAsync(AuthRefreshToken.User, cancellationToken));
     }
 
     [Authorize]
@@ -138,14 +135,14 @@ public class AuthController : ControllerBase
         }
 
         var userId = User.GetRequiredUserId();
-        var refreshToken = await _dbContext.RefreshTokens
+        var AuthRefreshToken = await _dbContext.AuthRefreshTokens
             .FirstOrDefaultAsync(
                 token => token.UserId == userId && token.Token == request.RefreshToken && token.RevokedAt == null,
                 cancellationToken);
 
-        if (refreshToken is not null)
+        if (AuthRefreshToken is not null)
         {
-            refreshToken.RevokedAt = DateTime.UtcNow;
+            AuthRefreshToken.RevokedAt = DateTime.UtcNow;
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
@@ -158,8 +155,6 @@ public class AuthController : ControllerBase
     {
         var userId = User.GetRequiredUserId();
         var user = await _dbContext.Users
-            .Include(entity => entity.UserRoles)
-                .ThenInclude(userRole => userRole.Role)
             .FirstOrDefaultAsync(entity => entity.Id == userId && entity.IsActive, cancellationToken);
 
         if (user is null)
@@ -173,13 +168,13 @@ public class AuthController : ControllerBase
     private async Task<AuthResponse> CreateAuthResponseAsync(User user, CancellationToken cancellationToken)
     {
         var accessToken = _tokenService.CreateAccessToken(user);
-        var refreshToken = _tokenService.CreateRefreshToken();
+        var AuthRefreshToken = _tokenService.CreateRefreshToken();
 
-        _dbContext.RefreshTokens.Add(new RefreshToken
+        _dbContext.AuthRefreshTokens.Add(new AuthRefreshToken
         {
             UserId = user.Id,
-            Token = refreshToken.Token,
-            ExpiresAt = refreshToken.ExpiresAt
+            Token = AuthRefreshToken.Token,
+            ExpiresAt = AuthRefreshToken.ExpiresAt
         });
         await _dbContext.SaveChangesAsync(cancellationToken);
 
@@ -187,31 +182,16 @@ public class AuthController : ControllerBase
             user.Id,
             user.Email,
             user.FullName,
-            user.UserRoles.Select(userRole => userRole.Role.Name).ToArray(),
+            new[] { user.RoleName },
             accessToken.Token,
             accessToken.ExpiresAt,
-            refreshToken.Token,
-            refreshToken.ExpiresAt);
-    }
-
-    private async Task<Role> GetOrCreateRoleAsync(string roleName, CancellationToken cancellationToken)
-    {
-        var role = await _dbContext.Roles.FirstOrDefaultAsync(entity => entity.Name == roleName, cancellationToken);
-        if (role is not null)
-        {
-            return role;
-        }
-
-        role = new Role { Name = roleName };
-        _dbContext.Roles.Add(role);
-        return role;
+            AuthRefreshToken.Token,
+            AuthRefreshToken.ExpiresAt);
     }
 
     private Task<User?> LoadUserByEmailAsync(string email, CancellationToken cancellationToken)
     {
         return _dbContext.Users
-            .Include(user => user.UserRoles)
-                .ThenInclude(userRole => userRole.Role)
             .FirstOrDefaultAsync(user => user.Email == email, cancellationToken);
     }
 
@@ -221,7 +201,7 @@ public class AuthController : ControllerBase
             user.Id,
             user.Email,
             user.FullName,
-            user.UserRoles.Select(userRole => userRole.Role.Name).ToArray());
+            new[] { user.RoleName });
     }
 
     private static string NormalizeEmail(string email)

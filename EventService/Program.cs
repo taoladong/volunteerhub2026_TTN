@@ -1,13 +1,14 @@
+using BaseCore.Repository;
 using BaseCore.Repository.EFCore;
-using EventService.Data;
 using EventService.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddDbContext<EventDbContext>(options =>
+builder.Services.AddDbContext<MySqlDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
         ?? "Server=(localdb)\\mssqllocaldb;Database=VolunteerHubEventService;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"));
 builder.Services.AddScoped<IEventService, EventService.Services.EventService>();
@@ -25,7 +26,8 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();

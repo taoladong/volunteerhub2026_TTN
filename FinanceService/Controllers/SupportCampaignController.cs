@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 
-namespace BaseCore.APIService.Controllers
+namespace FinanceService.Controllers
 {
     [ApiController]
     public class SupportCampaignController : ControllerBase
@@ -586,7 +586,7 @@ namespace BaseCore.APIService.Controllers
             return donations ?? new { confirmedAmount = 0m, pendingAmount = 0m, confirmedCount = 0, pendingCount = 0 };
         }
 
-        private bool CanManageEvent(Entities.Event ev, int? userId)
+        private bool CanManageEvent(BaseCore.Entities.Event ev, int? userId)
         {
             if (userId == null) return false;
             var role = User.FindFirst(ClaimTypes.Role)?.Value;
@@ -639,7 +639,7 @@ namespace BaseCore.APIService.Controllers
             return null;
         }
 
-        private static string? CanOpenCampaign(Entities.Event ev, SupportCampaign campaign)
+        private static string? CanOpenCampaign(BaseCore.Entities.Event ev, SupportCampaign campaign)
         {
             if (ev.Status != "Approved")
                 return "Only approved events can open support campaigns";

@@ -1,4 +1,4 @@
-using AuthService.Entities;
+using BaseCore.Entities;
 
 namespace AuthService.Contracts;
 
@@ -22,7 +22,7 @@ public record ProfileResponse(
     string? Address,
     string? Bio,
     string? AvatarUrl,
-    VerificationStatus KycStatus,
+    string KycStatus,
     DateTime CreatedAt,
     DateTime? UpdatedAt,
     IReadOnlyCollection<ProfileSkillResponse> Skills,
@@ -44,7 +44,7 @@ public record ProfileSkillResponse(
     string? Description,
     int? YearsOfExperience,
     string? Note,
-    VerificationStatus VerificationStatus,
+    string VerificationStatus,
     string? Level,
     string? EvidenceUrl,
     string? VerificationNote);
@@ -65,7 +65,7 @@ public record KycSubmissionResponse(
     string IdentityNumber,
     string? DocumentFrontUrl,
     string? DocumentBackUrl,
-    VerificationStatus Status,
+    string Status,
     string? ReviewNote,
     DateTime SubmittedAt,
     DateTime? ReviewedAt);

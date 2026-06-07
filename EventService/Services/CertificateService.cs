@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using EventService.Entities;
-using EventService.Data;
+using BaseCore.Entities;
+using BaseCore.Repository;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
@@ -13,11 +13,11 @@ namespace EventService.Services
 {
     public class CertificateService : ICertificateService
     {
-        private readonly EventDbContext _context;
+        private readonly MySqlDbContext _context;
         private readonly INotificationService _notificationService;
         private readonly IBadgeService _badgeService;
 
-        public CertificateService(EventDbContext context, INotificationService notificationService, IBadgeService badgeService)
+        public CertificateService(MySqlDbContext context, INotificationService notificationService, IBadgeService badgeService)
         {
             _context = context;
             _notificationService = notificationService;

@@ -1,5 +1,5 @@
-using EventService.Data;
-using EventService.Entities;
+using BaseCore.Repository;
+using BaseCore.Entities;
 
 namespace EventService.Services;
 
@@ -25,9 +25,9 @@ public interface IChannelService
 
 public class AuditLogService : IAuditLogService
 {
-    private readonly EventDbContext _context;
+    private readonly MySqlDbContext _context;
 
-    public AuditLogService(EventDbContext context)
+    public AuditLogService(MySqlDbContext context)
     {
         _context = context;
     }
@@ -66,9 +66,9 @@ public class BadgeService : IBadgeService
 
 public class ChannelService : IChannelService
 {
-    private readonly EventDbContext _context;
+    private readonly MySqlDbContext _context;
 
-    public ChannelService(EventDbContext context)
+    public ChannelService(MySqlDbContext context)
     {
         _context = context;
     }
