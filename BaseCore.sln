@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29201.188
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37314.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{6DBF8963-2DBC-4A5F-93DB-926B4AB140BF}"
 EndProject
@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseCore.DTO", "Common\Base
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseCore.Services", "Service\BaseCore.Services\BaseCore.Services.csproj", "{19540157-8E18-4C2D-A482-34832430B612}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseCore.ApiGateway", "Microservice\BaseCore.ApiGateway\BaseCore.ApiGateway.csproj", "{3934463F-480E-4BE1-8796-E79F458CAEE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "Microservice\BaseCore.ApiGateway\ApiGateway.csproj", "{3934463F-480E-4BE1-8796-E79F458CAEE7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService", "Microservice\AuthService\AuthService.csproj", "{B63491F7-6DE9-4DA4-94B1-1A52F7E401F8}"
 EndProject

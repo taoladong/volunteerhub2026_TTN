@@ -3,23 +3,19 @@
     "Name": "New Profile",
     "Projects": [
       {
-        "Path": "Service\\BaseCore.Services\\BaseCore.Services.csproj",
-        "Action": "Start"
-      },
-      {
-        "Path": "Microservice\\BaseCore.ApiGateway\\BaseCore.ApiGateway.csproj",
-        "Action": "Start"
-      },
-      {
-        "Path": "Microservice\\BaseCore.APIService\\BaseCore.APIService.csproj",
-        "Action": "Start"
-      },
-      {
         "Path": "Microservice\\EventService\\EventService.csproj",
         "Action": "Start"
       },
       {
         "Path": "Microservice\\FinanceService\\FinanceService.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Microservice\\AuthService\\AuthService.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Microservice\\BaseCore.ApiGateway\\ApiGateway.csproj",
         "Action": "Start"
       }
     ]
