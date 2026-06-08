@@ -17,6 +17,12 @@ const PublicProfile = lazy(() => import('./pages/shared/PublicProfile'));
 const Profile = lazy(() => import('./pages/volunteer/Profile'));
 const Activity = lazy(() => import('./pages/volunteer/Activity'));
 const Achievements = lazy(() => import('./pages/volunteer/Achievements'));
+const MyEvents = lazy(() => import('./pages/organizer/MyEvents'));
+const EventForm = lazy(() => import('./pages/organizer/EventForm'));
+const ManageEvent = lazy(() => import('./pages/organizer/ManageEvent/index'));
+const OrganizerInsights = lazy(() => import('./pages/organizer/OrganizerInsights'));
+const AdminEvents = lazy(() => import('./pages/admin/AdminEvents'));
+const AdminRatings = lazy(() => import('./pages/admin/AdminRatings'));
 
 const PageLoader = () => (
   <div className="flex items-center justify-center h-64">
@@ -55,6 +61,15 @@ function AppRoutes() {
         <Route path="/achievements" element={<AppPage roles={['Volunteer']}><Achievements /></AppPage>} />
         <Route path="/my-badges" element={<Navigate to="/achievements" replace />} />
         <Route path="/my-certificates" element={<Navigate to="/achievements?tab=certificates" replace />} />
+
+        <Route path="/my-events" element={<AppPage roles={['Organizer']}><MyEvents /></AppPage>} />
+        <Route path="/events/create" element={<AppPage roles={['Organizer']}><EventForm /></AppPage>} />
+        <Route path="/events/:id/edit" element={<AppPage roles={['Organizer']}><EventForm /></AppPage>} />
+        <Route path="/events/:id/manage" element={<AppPage roles={['Organizer']}><ManageEvent /></AppPage>} />
+        <Route path="/organizer/insights" element={<AppPage roles={['Organizer']}><OrganizerInsights /></AppPage>} />
+
+        <Route path="/admin/events" element={<AppPage roles={['Admin']}><AdminEvents /></AppPage>} />
+        <Route path="/admin/ratings" element={<AppPage roles={['Admin']}><AdminRatings /></AppPage>} />
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
