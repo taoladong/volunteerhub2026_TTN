@@ -10,7 +10,7 @@ VolunteerHub là cổng sự kiện tình nguyện phục vụ môn Thực tập
 - Đề tài: VolunteerHub
 - Repository: https://github.com/taoladong/volunteerhub2026_TTN
 - Trello: https://trello.com/b/q3SPEszi/b%E1%BA%A3ng-trello-c%E1%BB%A7a-toi
-- Google Drive: https://drive.google.com/drive/u/0/folders/1qnu4XJEBNgHDcGQzNKacwwpaZxygxAdZ
+- Google Drive: [https://drive.google.com/drive/u/0/folders/1qnu4XJEBNgHDcGQzNKacwwpaZxygxAdZ](https://drive.google.com/drive/folders/1TcJYLvHBmMjqnEehKxoPUKJ-0zl3bis7?usp=drive_link)
 
 ## Phân công
 
