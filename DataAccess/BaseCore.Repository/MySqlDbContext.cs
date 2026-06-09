@@ -177,8 +177,8 @@ namespace BaseCore.Repository
                 entity.Property(e => e.KycAdminNote).HasMaxLength(1000).IsRequired(false);
                 entity.Property(e => e.TotalDonatedAmount).HasPrecision(18, 2);
                 entity.HasOne(e => e.User)
-                      .WithMany()
-                      .HasForeignKey(e => e.UserId)
+                      .WithOne(u => u.VolunteerProfile)
+                      .HasForeignKey<VolunteerProfile>(e => e.UserId)
                       .OnDelete(DeleteBehavior.Cascade);
                 entity.HasIndex(e => e.UserId).IsUnique();
             });
@@ -711,20 +711,16 @@ namespace BaseCore.Repository
             );
 
             // Seed users (4 roles) with fixed hashes to keep EF migrations stable
-            var saltAdmin = new byte[] { 120, 8, 176, 127, 89, 181, 227, 27, 90, 188, 243, 26, 125, 173, 154, 156 };
-            var saltOrg = new byte[] { 58, 34, 153, 111, 0, 143, 116, 1, 232, 193, 45, 121, 201, 7, 162, 24 };
-            var saltSponsor = new byte[] { 88, 137, 43, 39, 44, 169, 150, 8, 184, 242, 30, 239, 47, 220, 116, 11 };
-            var saltVol = new byte[] { 244, 33, 47, 59, 159, 253, 173, 49, 188, 35, 70, 197, 60, 118, 28, 219 };
-            const string pwAdmin = "OFrMzZA23/L+t9awaL27ipv1+5s6PGPIS5EV7/aJO2E=";
-            const string pwOrg = "lF5perLzkWzxV9EMfJSHtRNcwxMXabNtUJgZm2M6lnQ=";
-            const string pwSponsor = "sHZuTXhqDKnIQEPxOA7P7dKH+4MzFUN/d1Vu9WphRZk=";
-            const string pwVol = "5QlPWdlYiXJY7DyVkXMYW3r4rzAGOGP+LljErQueGcY=";
+            const string pwAdmin = "PBKDF2$100000$8hP2RzUyDTMYGn2FmkWeIA==$ycAiMjTAGJhWAONR9arGMBXWq7tMCB8+Snzl9EJ6qFg=";
+            const string pwOrg = "PBKDF2$100000$rg4u+pTW60P+UVFy/ytv0Q==$o5lLZgxJL8tdgoiB+XNAMmDhrcxtUz1K1AkeNIb6/yg=";
+            const string pwSponsor = "PBKDF2$100000$dgAuZflTIBU/Z4RMdIZoZw==$fzIpC39ToJFo5Nqs4RWeiiEnDl+hd2z1u86SCJg7oP4=";
+            const string pwVol = "PBKDF2$100000$ctfTkMGGrWOS/DImNjzzBA==$J43F5C0unDIbHdxyzWFENQGeb1XdwLNSgfSbagBlCGA=";
 
             modelBuilder.Entity<User>().HasData(
-                new User { Id = 1, UserName = "admin",     Password = pwAdmin,   Salt = saltAdmin,   Name = "Administrator",   Email = "admin@volunteerhub.vn",     IsActive = true, UserType = 3, Created = new DateTime(2024, 1, 1), Position = "Admin",     Contact = "", Image = "", Phone = "" },
-                new User { Id = 2, UserName = "organizer", Password = pwOrg,     Salt = saltOrg,     Name = "Nguyen Van Minh", Email = "organizer@volunteerhub.vn", IsActive = true, UserType = 1, Created = new DateTime(2024, 1, 1), Position = "Organizer", Contact = "", Image = "", Phone = "" },
-                new User { Id = 3, UserName = "sponsor",   Password = pwSponsor, Salt = saltSponsor, Name = "Tran Thi Lan",    Email = "sponsor@volunteerhub.vn",   IsActive = true, UserType = 2, Created = new DateTime(2024, 1, 1), Position = "Sponsor",   Contact = "", Image = "", Phone = "" },
-                new User { Id = 4, UserName = "volunteer", Password = pwVol,     Salt = saltVol,     Name = "Le Van Hung",     Email = "volunteer@volunteerhub.vn", IsActive = true, UserType = 0, Created = new DateTime(2024, 1, 1), Position = "Volunteer", Contact = "", Image = "", Phone = "" }
+                new User { Id = 1, UserName = "admin",     Password = pwAdmin,   Salt = null,   Name = "Administrator",   Email = "admin@volunteerhub.vn",     IsActive = true, UserType = 3, Created = new DateTime(2024, 1, 1), Position = "Admin",     Contact = "", Image = "", Phone = "" },
+                new User { Id = 2, UserName = "organizer", Password = pwOrg,     Salt = null,     Name = "Nguyen Van Minh", Email = "organizer@volunteerhub.vn", IsActive = true, UserType = 1, Created = new DateTime(2024, 1, 1), Position = "Organizer", Contact = "", Image = "", Phone = "" },
+                new User { Id = 3, UserName = "sponsor",   Password = pwSponsor, Salt = null, Name = "Tran Thi Lan",    Email = "sponsor@volunteerhub.vn",   IsActive = true, UserType = 2, Created = new DateTime(2024, 1, 1), Position = "Sponsor",   Contact = "", Image = "", Phone = "" },
+                new User { Id = 4, UserName = "volunteer", Password = pwVol,     Salt = null,     Name = "Le Van Hung",     Email = "volunteer@volunteerhub.vn", IsActive = true, UserType = 0, Created = new DateTime(2024, 1, 1), Position = "Volunteer", Contact = "", Image = "", Phone = "" }
             );
 
             modelBuilder.Entity<OrganizerVerification>().HasData(

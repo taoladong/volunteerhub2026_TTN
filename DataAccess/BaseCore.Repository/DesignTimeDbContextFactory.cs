@@ -11,7 +11,7 @@ namespace BaseCore.Repository
         public MySqlDbContext CreateDbContext(string[] args)
         {
             var options = new DbContextOptionsBuilder<MySqlDbContext>()
-                .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=VolunteerHub;Trusted_Connection=True;TrustServerCertificate=True")
+                .UseSqlServer("Server=OHMYGOD\\HOSYVINH;Database=VolunteerHub;Trusted_Connection=True;TrustServerCertificate=True")
                 .Options;
             return new MySqlDbContext(options);
         }
