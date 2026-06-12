@@ -31,7 +31,15 @@ export function AuthProvider({ children }) {
 
     try {
       const res = await authApi.me();
-      const userData = res.data?.user || res.data;
+      const rawData = res.data?.user || res.data;
+      const userData = {
+        id: rawData.userId || rawData.id,
+        userId: rawData.userId || rawData.id,
+        email: rawData.email,
+        fullName: rawData.fullName || rawData.name,
+        roles: rawData.roles || [],
+        role: rawData.roles?.[0] || 'Volunteer'
+      };
 
       // Chỉ áp dụng kết quả /auth/me nếu token hiện tại vẫn là token đã dùng khi request bắt đầu.
       // Tránh request cũ ghi đè hoặc đăng xuất nhầm session mới sau khi user vừa đăng nhập lại.
@@ -83,7 +91,17 @@ export function AuthProvider({ children }) {
 
   const login = async (identifier, password) => {
     const res = await authApi.login(identifier, password);
-    const { token, refreshToken, user: userData } = res.data;
+    const data = res.data;
+    const token = data.accessToken || data.token;
+    const refreshToken = data.refreshToken;
+    const userData = {
+      id: data.userId,
+      userId: data.userId,
+      email: data.email,
+      fullName: data.fullName,
+      roles: data.roles || [],
+      role: data.roles?.[0] || 'Volunteer'
+    };
     authStorage.setAuth({ token, refreshToken, user: userData });
     setUser(userData);
     return userData;
@@ -91,12 +109,22 @@ export function AuthProvider({ children }) {
 
   const register = async (data) => {
     const res = await authApi.register(data);
-    const { token, refreshToken, user: userData } = res.data;
+    const responseData = res.data;
+    const token = responseData.accessToken || responseData.token;
+    const refreshToken = responseData.refreshToken;
+    const userData = {
+      id: responseData.userId,
+      userId: responseData.userId,
+      email: responseData.email,
+      fullName: responseData.fullName,
+      roles: responseData.roles || [],
+      role: responseData.roles?.[0] || 'Volunteer'
+    };
     if (token) {
       authStorage.setAuth({ token, refreshToken, user: userData });
       setUser(userData);
     }
-    return res.data;
+    return responseData;
   };
 
   const updateUser = (patch) => {

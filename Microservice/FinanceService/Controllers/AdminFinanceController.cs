@@ -14,19 +14,11 @@ namespace FinanceService.Controllers
     [Authorize(Roles = "Admin")]
     public class AdminFinanceController : ControllerBase
     {
-#if FINANCE_SERVICE
         private const string FinanceOverviewRoute = "finance/overview";
         private const string OpenProposalsPastEventRoute = "finance/open-proposals-past-event";
         private const string StaleDonationsRoute = "finance/stale-donations";
         private const string UnreportedCampaignsRoute = "finance/unreported-campaigns";
         private const string ExportFinanceRoute = "export/finance";
-#else
-        private const string FinanceOverviewRoute = "finance/overview-detail";
-        private const string OpenProposalsPastEventRoute = "finance-detail/open-proposals-past-event";
-        private const string StaleDonationsRoute = "finance-detail/stale-donations";
-        private const string UnreportedCampaignsRoute = "finance-detail/unreported-campaigns";
-        private const string ExportFinanceRoute = "export/finance-detail";
-#endif
         private readonly MySqlDbContext _context;
         private readonly IAuditLogService _auditLogService;
 

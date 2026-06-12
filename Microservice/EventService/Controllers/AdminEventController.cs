@@ -23,7 +23,7 @@ namespace EventService.Controllers
             _auditLogService = auditLogService;
         }
 
-        [HttpGet("export/events-detail")]
+        [HttpGet("export/events")]
         [EnableRateLimiting("read-sensitive")]
         public async Task<IActionResult> ExportEvents([FromQuery] string format = "json")
         {
